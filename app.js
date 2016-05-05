@@ -1,4 +1,3 @@
-var express = requlfjlejgkl
 var dotEnv          = require('dotenv').config(),
     express         = require('express'),
     morgan          = require('morgan'),
@@ -11,3 +10,35 @@ var dotEnv          = require('dotenv').config(),
     // apiAuthRouter   = require('./server/routes/api/auth.js'),
     // apiUsersRouter  = require('./server/routes/api/users.js'),
     ejs             = require("ejs");
+
+
+    // connect to db
+    // process.env.MONGOLAB_URI is needed for when we deploy to Heroku
+mongoose.connect( process.env.MONGOLAB_URI || "mongodb://localhost/dressme_app" );
+app.use(morgan('dev'));
+app.set('view engine', 'ejs')
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+// This is how we read the cookies sent over from the browser
+app.use(cookieParser());
+
+// Set static file root folder
+app.use(express.static('client/public'));
+
+// CANT GET THIS INDEX ROUTER TO WORK
+// var indexRouter = require('./server/routes/index.js');
+// app.use(app.use('/', indexRouter));
+
+app.get('/',function(req,res){
+  res.render("index");
+});
+
+var port = process.env.PORT || 3000;
+app.listen( port, function() {
+  console.log("sunny skies on 3000");
+});
