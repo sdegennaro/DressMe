@@ -30,9 +30,13 @@ app.use(cookieParser());
 // Set static file root folder
 app.use(express.static('client/public'));
 
-var indexRouter = require('./server/routes/index.js');
-app.use(app.use('/', indexRouter));
+// CANT GET THIS INDEX ROUTER TO WORK
+// var indexRouter = require('./server/routes/index.js');
+// app.use(app.use('/', indexRouter));
 
+app.get('/',function(req,res){
+  res.render("index");
+});
 
 var port = process.env.PORT || 3000;
 app.listen( port, function() {
