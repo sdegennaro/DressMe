@@ -16,7 +16,7 @@ var dotEnv          = require('dotenv').config(),
     // process.env.MONGOLAB_URI is needed for when we deploy to Heroku
 mongoose.connect( process.env.MONGOLAB_URI || "mongodb://localhost/dressme_app" );
 app.use(morgan('dev'));
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'client/public/views'));
 
 // parse application/x-www-form-urlencoded
@@ -32,11 +32,11 @@ app.use(cookieParser());
 app.use(express.static('client/public'));
 
 // CANT GET THIS INDEX ROUTER TO WORK
-// app.use(app.use('/', indexRouter));
+app.use('/', indexRouter);
 
-app.get('/',function(req,res){
-  res.render("index");
-});
+// app.get('/',function(req,res){
+//   res.render("index");
+// });
 
 var port = process.env.PORT || 3000;
 app.listen( port, function() {
