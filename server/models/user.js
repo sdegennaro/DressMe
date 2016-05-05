@@ -11,4 +11,6 @@ var userSchema = mongoose.Schema({
   temp_pref: {type: String, required: true},
   is_admin: {type: Number, default: 0},
   text_opt_in: {type: Number, default: 0}
-});
+}, { timestamps: true });
+
+module.exports = mongoose.model('User', userSchema);
