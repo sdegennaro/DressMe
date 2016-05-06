@@ -51,7 +51,8 @@ auth.loginFailure = function(jqXHR){
 };
 
 auth.setLoggedInState = function(){
-  $(".forms.container").hide();
+  $("#login-form").toggleClass('displayed');
+  $("#login-form").toggleClass('hidden');
   $("#logged-in-content").fadeIn(1000);
   auth.users.init();
 };
@@ -89,14 +90,17 @@ auth.users = {
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
       $("#sign-up-form, #login-form" ).toggleClass('hidden');
+      $("#sign-up-form, #login-form" ).toggleClass('displayed');
+
   });
 };
 
 auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
-    console.log("click");
     Cookies.remove("jwt_token");
     auth.checkLoggedInStatus();
+    $('#landing-container').toggleClass('hidden');
+    $('#landing-container').toggleClass('displayed');
   } );
 }
 
@@ -117,7 +121,12 @@ auth.getToken = function(){
 
 
 auth.setLoggedOutState = function() {
-  $('#logged-in-content').hide();
+  // $('#logged-in-content').hide();
+  $('#logged-in-content').toggleClass('hidden');
+  $('#logged-in-content').toggleClass('displayed');
+
+
+
   $('.forms.container').fadeIn(1000);
 }
 
