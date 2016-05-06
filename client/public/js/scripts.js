@@ -1,4 +1,3 @@
-
 console.log('loaded...');
 
 var auth = auth || {};
@@ -53,7 +52,10 @@ auth.loginFailure = function(jqXHR){
 auth.setLoggedInState = function(){
   $("#login-form").toggleClass('displayed');
   $("#login-form").toggleClass('hidden');
-  $("#logged-in-content").fadeIn(1000);
+
+  $("#logged-in-content").toggleClass('displayed');
+  $("#logged-in-content").toggleClass('hidden');
+
   auth.users.init();
 };
 
@@ -127,7 +129,7 @@ auth.setLoggedOutState = function() {
 
 
 
-  $('.forms.container').fadeIn(1000);
+  // $('.forms.container').fadeIn(1000);
 }
 
 auth.bindSignUpForm = function(){
