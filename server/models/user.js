@@ -13,15 +13,15 @@ var userSchema = mongoose.Schema({
   text_opt_in: {type: Number, default: 0}
 }, { timestamps: true });
 
-// UserSchema.pre('save', function(next){
-//   if( this.isModified('password') ){
-//     this.password = bcrypt.hashSync(this.password, 10);
-//   }
-//   next();
-// });
-//
-// UserSchema.methods.authenticate = function(passwordTry){
-//   return bcrypt.compareSync(passwordTry, this.password);
-// };
+UserSchema.pre('save', function(next){
+  if( this.isModified('password') ){
+    this.password = bcrypt.hashSync(this.password, 10);
+  }
+  next();
+});
+
+UserSchema.methods.authenticate = function(passwordTry){
+  return bcrypt.compareSync(passwordTry, this.password);
+};
 
 module.exports = mongoose.model('User', userSchema);

@@ -14,7 +14,6 @@ JwtOpts.jwtFromRequest = function(req) {
   return token;
 };
 
-// you have to make create your own .env file. refer to the template guides for reference
 JwtOpts.secretOrKey = process.env.JWT_SECRET;
 
 // TODO: Not needed?

@@ -5,38 +5,41 @@ var dotEnv          = require('dotenv').config(),
     bodyParser      = require('body-parser'),
     cookieParser    = require('cookie-parser'),
     app             = express(),
-    path            = require('path'),
     indexRouter     = require('./server/routes/index.js'),
-    // apiAuthRouter   = require('./server/routes/api/auth.js'),
-    // apiUsersRouter  = require('./server/routes/api/users.js'),
+    apiAuthRouter   = require('./server/routes/api/auth.js'),
+    apiUsersRouter  = require('./server/routes/api/users.js'),
+
     ejs             = require("ejs");
+    path            = require('path'),
 
 
     // connect to db
     // process.env.MONGOLAB_URI is needed for when we deploy to Heroku
 mongoose.connect( process.env.MONGOLAB_URI || "mongodb://localhost/dressme_app" );
 app.use(morgan('dev'));
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'client/public/views'));
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse application/json
 app.use(bodyParser.json());
-
 // This is how we read the cookies sent over from the browser
 app.use(cookieParser());
-
 // Set static file root folder
 app.use(express.static('client/public'));
 
-// CANT GET THIS INDEX ROUTER TO WORK
-app.use('/', indexRouter);
 
-// app.get('/',function(req,res){
-//   res.render("index");
-// });
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'client/public/views'));
+
+
+
+
+
+app.use('/', indexRouter);
+app.use('/api/auth', apiAuthRouter);
+app.use('/api/users', apiUsersRouter);
+
+
 
 var port = process.env.PORT || 3000;
 app.listen( port, function() {
