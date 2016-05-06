@@ -1,4 +1,4 @@
-var weatherRecs = {
+var weatherObject = {
       sunny: {
         minTemp: 80,
         maxTemp: 90,
