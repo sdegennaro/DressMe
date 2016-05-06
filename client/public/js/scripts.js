@@ -22,6 +22,7 @@ auth.submitLoginForm = function(){
 
 
   };
+  console.log(payload);
 
   $.post('/api/auth', payload)
     .done(auth.loginSuccess)
