@@ -4,7 +4,7 @@ var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
 
 
-var userSchema = mongoose.Schema({
+var UserSchema = mongoose.Schema({
   username: {type: Number, required: true, minlength: 10, maxlength: 10},
   password: {type: String},
   zipcode: {type: Number, required: true, minlength: 5, maxlength: 5},
@@ -24,4 +24,4 @@ UserSchema.methods.authenticate = function(passwordTry){
   return bcrypt.compareSync(passwordTry, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);
