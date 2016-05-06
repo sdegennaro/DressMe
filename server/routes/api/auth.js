@@ -1,20 +1,21 @@
-var express = require("express");
-var authRouter = express.Router();
+var express = require('express'),
+    usersRouter = express.Router(),
+    passport = require('../../lib/passportStrategy.js'),
+    User = require('../../models/user.js'),
+    jwt = require('jsonwebtoken');
 
-var passport  = require("../../lib/passportStrategy");
-var jwt       = require("jsonwebtoken");
-var jwtConfig = require("../../config/jwt.js");
+// initialize passport
+usersRouter.use(passport.initialize());
 
-var User = require("../../models/user");
+// Log In and if successful send back the token
 
-authRouter.use( passport.initialize() );
-
-authRouter.post("/", passport.authenticate('local', { session: false}), function( req, res, next ){
-    var token = jwt.sign( req.user, jwtConfig.secret, {
-      expiresIn: 18000
-    });
-
-    res.json({ token: token });
+// We would need to install express-flash for flash messages to work
+// We would also have to add the failureFlash: true option here, exp: { session: false, failureFlash : true }
+usersRouter.post('/', passport.authenticate('local', { session: false }), function(req, res, next) {
+  var token = jwt.sign(req.user, process.env.JWT_SECRET, {
+    expiresIn: 1440 // expires in 24 hours
+  });
+  res.json({ token: token });
 });
 
-module.exports = authRouter;
+module.exports = usersRouter;

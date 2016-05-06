@@ -4,21 +4,27 @@ var express             = require('express'),
     User                = require('../../models/user.js');
 
 
-// usersRouter.post('/', function(req, res, next) {
-//
-//   User.create(req.body.user, function( err, dbUser ) {
-//     if (err) { res.status(500).end() }
-//     res.json( dbUser );
-//   });
-// });
-//
-// usersRouter.use(passport.authenticate('jwt', { session: false}));
-//
-// usersRouter.get('/', function(req, res, next) {
-//
-//   User.find(function( err, dbUsers ){
-//     res.json( dbUsers );
-//   });
-// });
+    // Create a new user
+usersRouter.post('/', function(req, res, next) {
+
+User.create(req.body.user, function( err, dbUser ) {
+
+  console.log(err);
+  if (err) { res.status(500).end() }
+
+  
+  res.json( dbUser );
+  });
+});
+
+usersRouter.use(passport.authenticate('jwt', { session: false}));
+
+    // GET all users
+usersRouter.get('/', function(req, res, next) {
+
+  User.find(function( err, dbUsers ){
+    res.json( dbUsers );
+    });
+  });
 
 module.exports = usersRouter;
