@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-console.log("hello");
-=======
+
 console.log('loaded...');
 
 var auth = auth || {};
@@ -169,4 +167,3 @@ $(function(){
   auth.bindSwitchFormLinks();
   auth.bindLogoutLink();
 });
->>>>>>> 8c9b11b31150a0b4eac5595b9b5fa25d8127d7e1
