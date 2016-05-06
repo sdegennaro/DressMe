@@ -10,4 +10,4 @@ var recSchema = mongoose.Schema({
     text: String
 });
 
-mongoose.model('Recommendation', recSchema);
+module.exports = mongoose.model('Recommendation', recSchema);
