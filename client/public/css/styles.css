@@ -5,3 +5,7 @@ body{
 .hidden{
   display: none;
 }
+
+.displayed{
+  display:block;
+}
