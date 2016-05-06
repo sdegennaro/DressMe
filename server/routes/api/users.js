@@ -18,9 +18,9 @@ usersRouter.use(passport.authenticate('jwt', { session: false}));
     // GET all users
 usersRouter.get('/', function(req, res, next) {
 
-User.find(function( err, dbUsers ){
-  res.json( dbUsers );
+  User.find(function( err, dbUsers ){
+    res.json( dbUsers );
+    });
   });
-});
 
 module.exports = usersRouter;
