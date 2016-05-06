@@ -2,6 +2,13 @@ console.log('loaded...');
 
 var auth = auth || {};
 
+function landingCTAButtonHandler(){
+    $("#landing-cta-button").on('click',function(){
+      // hide landing page content
+      $("#landing-container").css('display','none');
+    });
+};
+
 auth.bindLoginForm = function(){
 
   $("#login-form").on("submit", function(e){
@@ -19,10 +26,7 @@ auth.submitLoginForm = function(){
   var payload = {
     username: username,
     password: password,
-
-
   };
-  console.log(payload);
 
   $.post('/api/auth', payload)
     .done(auth.loginSuccess)
@@ -165,4 +169,5 @@ $(function(){
   auth.bindSignUpForm();
   auth.bindSwitchFormLinks();
   auth.bindLogoutLink();
+  landingCTAButtonHandler();
 });
