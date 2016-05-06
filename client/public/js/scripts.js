@@ -18,7 +18,9 @@ auth.submitLoginForm = function(){
 
   var payload = {
     username: username,
-    password: password
+    password: password,
+
+
   };
 
   $.post('/api/auth', payload)
@@ -120,8 +122,11 @@ auth.submitSignUpForm = function(){
   var $form    = $('#sign-up-form');
   var username = $form.find('[name=username]').val();
   var password = $form.find('[name=password]').val();
-  var email    = $form.find('[name=email]').val();
   var confirm  = $form.find('[name=password_confirm]').val();
+  var zipcode = $form.find("[name=zipcode]").val();
+  var temp_pref = $form.find("[name=temp_pref]").val();
+  var is_admin = $form.find("[name=is_admin]").val();
+  var text_opt_in = $form.find("[name=text_opt_in]").val();
 
   if (confirm !== password) {
     return auth.showAlert("Passwords do not match!");
@@ -130,8 +135,12 @@ auth.submitSignUpForm = function(){
   var payload = {
     user: {
       username: username,
-      email : email,
-      password: password
+      password: password,
+      zipcode: zipcode,
+      temp_pref: temp_pref,
+      is_admin: is_admin,
+      text_opt_in: text_opt_in
+
     }
   };
 
