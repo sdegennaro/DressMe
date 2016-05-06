@@ -2,6 +2,17 @@ console.log('loaded...');
 
 var auth = auth || {};
 
+function landingCTAButtonHandler(){
+    $("#landing-cta-button").on('click',function(){
+      // hide landing page content
+      $("#landing-container").toggleClass('displayed');
+      $("#landing-container").toggleClass('hidden');
+
+      $("#sign-up-form").toggleClass('displayed');
+      $("#sign-up-form").toggleClass('hidden');
+    });
+};
+
 auth.bindLoginForm = function(){
 
   $("#login-form").on("submit", function(e){
@@ -19,10 +30,7 @@ auth.submitLoginForm = function(){
   var payload = {
     username: username,
     password: password,
-
-
   };
-  console.log(payload);
 
   $.post('/api/auth', payload)
     .done(auth.loginSuccess)
@@ -152,6 +160,11 @@ auth.submitSignUpForm = function(){
 
 auth.signUpSuccess = function(data, status, jqXHR) {
   console.log(data, status, jqXHR);
+  $("#sign-up-form").toggleClass('displayed');
+  $("#sign-up-form").toggleClass('hidden');
+
+  $("#login-form").toggleClass('displayed');
+  $("#login-form").toggleClass('hidden');
   // should show a success alert
 }
 
@@ -165,4 +178,5 @@ $(function(){
   auth.bindSignUpForm();
   auth.bindSwitchFormLinks();
   auth.bindLogoutLink();
+  landingCTAButtonHandler();
 });
