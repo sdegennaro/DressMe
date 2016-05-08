@@ -1,21 +1,27 @@
-
 console.log('loaded...');
 
 var auth = auth || {};
 
-function landingCTAButtonHandler(){
-    $("#landing-cta-button").on('click',function(){
-      // hide landing page content
-      $("#landing-container").toggleClass('displayed');
-      $("#landing-container").toggleClass('hidden');
 
-      $("#sign-up-form").toggleClass('displayed');
-      $("#sign-up-form").toggleClass('hidden');
-    });
+function switchDisplay(DOMelement){
+  DOMelement.toggleClass('hidden');
+  DOMelement.toggleClass('displayed');
+};
+
+function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMelement){
+  clickElement.on('click', function(){
+    switchDisplay(DOMelement);
+    if(secondDOMelement){
+      switchDisplay(secondDOMelement);
+    };
+    if(thirdDOMelement){
+      switchDisplay(thirdDOMelement);
+    };
+
+  })
 };
 
 auth.bindLoginForm = function(){
-
   $("#login-form").on("submit", function(e){
     e.preventDefault();
     auth.submitLoginForm();
@@ -51,8 +57,11 @@ auth.loginFailure = function(jqXHR){
 };
 
 auth.setLoggedInState = function(){
-  $(".forms.container").hide();
-  $("#logged-in-content").fadeIn(1000);
+  $("#login-form").toggleClass('displayed');
+  $("#login-form").toggleClass('hidden');
+
+  switchDisplay($("#logged-in-container"))
+
   auth.users.init();
 };
 
@@ -67,6 +76,14 @@ auth.users = {
       auth.users.getAll()
         .done(function(users){
           auth.users.renderUsers(users);
+          var $form = $("#login-form");
+          var username = $form.find("[name=username]").val();
+          for (var i = 0; i < users.length; i++) {
+            if(users[i].username == username){
+              renderAccountInfo(users[i]);
+              return;
+            }
+          }
         })
         .fail( function(jqXHR){
             console.log(jqHXR);
@@ -75,6 +92,7 @@ auth.users = {
   getAll: function(){
     return $.getJSON("/api/users");
   },
+
   renderUsers: function(users){
     var $container = $("#users-container");
     users.forEach( function(user){
@@ -86,23 +104,30 @@ auth.users = {
 
 }
 
+function renderAccountInfo(userObject){
+  $("#account-container").find("[name=username]").val(userObject.username);
+  $("#account-container").find("[name=zipcode]").val(userObject.zipcode);
+  $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
+  $("#account-container").find("[name=is_admin]").val(userObject.is_admin);
+  $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
+};
+
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
-      $("#sign-up-form, #login-form" ).toggleClass('hidden');
+      switchDisplay($("#sign-up-form"));
+      switchDisplay($("#login-form"));
   });
 };
 
 auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
-    console.log("click");
     Cookies.remove("jwt_token");
     auth.checkLoggedInStatus();
-  } );
-}
+  });
+};
 
 auth.checkLoggedInStatus= function(){
   var token = auth.getToken();
-
   if(token){
     auth.setLoggedInState();
   } else {
@@ -110,15 +135,23 @@ auth.checkLoggedInStatus= function(){
   }
 };
 
-
 auth.getToken = function(){
   return Cookies.get("jwt_token");
-}
-
+};
 
 auth.setLoggedOutState = function() {
-  $('#logged-in-content').hide();
-  $('.forms.container').fadeIn(1000);
+
+  switchDisplay($('#logged-in-container'));
+  switchDisplay($('#landing-container'));
+  if($("#content-container").hasClass('hidden')){
+    switchDisplay($('#content-container'));
+    switchDisplay($('#account-container'));
+  };
+  $("#login-form").find('[name=username]').val("");
+  $("#login-form").find('[name=password]').val("");
+  // $('#logged-in-content').toggleClass('hidden');
+  // $('#logged-in-content').toggleClass('displayed');
+  // $('.forms.container').fadeIn(1000);
 }
 
 auth.bindSignUpForm = function(){
@@ -160,7 +193,7 @@ auth.submitSignUpForm = function(){
 };
 
 auth.signUpSuccess = function(data, status, jqXHR) {
-  console.log(data, status, jqXHR);
+  // console.log(data, status, jqXHR);
   $("#sign-up-form").toggleClass('displayed');
   $("#sign-up-form").toggleClass('hidden');
 
@@ -173,11 +206,95 @@ auth.signUpFailure = function(jqXHR) {
   auth.showAlert("There was an error. Try again!");
 }
 
+function deleteHandler(){
+  $("#delete-button").on("click", function(e){
+    e.preventDefault();
+    var username = $("#account-container").find("[name=username]").val();
+    var id
+    auth.users.getAll()
+      .done(function(users){
+        for (var i = 0; i < users.length; i++) {
+          if(users[i].username == username){
+            id = users[i]._id;
+            $.ajax({
+              url:'/api/users/'+id+"/remove",
+              type: 'DELETE',
+              success: function(){
+                console.log('done!');
+              }
+            })
+          }
+        }
+        Cookies.remove("jwt_token");
+        auth.checkLoggedInStatus();
+      })
+  })
+}
+
+function updateHandler(){
+  $("#update-button").on("click", function(e){
+    e.preventDefault();
+    var username = $("#account-container").find("[name=username]").val();
+    var zipcode = $("#account-container").find("[name=zipcode]").val();
+    var temp_pref = $("#account-container").find("[name=temp_pref]").val();
+    var is_admin = $("#account-container").find("[name=is_admin]").val();
+    var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
+    var id
+    auth.users.getAll()
+      .done(function(users){
+        for (var i = 0; i < users.length; i++) {
+          if(users[i].username == username){
+            id = users[i]._id;
+            $.ajax({
+              url:'/api/users/'+id,
+              type: 'PUT',
+              data: {
+                username: username,
+                zipcode: zipcode,
+                temp_pref: temp_pref,
+                is_admin: is_admin,
+                text_opt_in: text_opt_in
+              },
+              success: function(){
+                console.log('updated!');
+              }
+            })
+          }
+        }
+      })
+  })
+}
+
+// auth.users.getAll()
+//   .done(function(users){
+//     auth.users.renderUsers(users);
+//     var $form = $("#login-form");
+//     var username = $form.find("[name=username]").val();
+//     for (var i = 0; i < users.length; i++) {
+//       if(users[i].username == username){
+//         renderAccountInfo(users[i]);
+//         return;
+//       }
+//     }
+//   })
+
 $(function(){
-  auth.checkLoggedInStatus();
+  var landingCTAbutton = $("#landing-cta-button");
+  var landingContainer = $("#landing-container");
+  var signupForm = $("#sign-up-form");
+  var landingLoginLink = $("#landing-login-link");
+  var loginForm = $("#login-form");
+  var accountLink = $('#account-link');
+  var accountContainer = $('#account-container');
+  var contentContainer = $("#content-container")
+  // auth.checkLoggedInStatus();
   auth.bindLoginForm();
   auth.bindSignUpForm();
   auth.bindSwitchFormLinks();
   auth.bindLogoutLink();
-  landingCTAButtonHandler();
+  switchClickHandler(landingCTAbutton, landingContainer, signupForm);
+  switchClickHandler(landingLoginLink, landingContainer, loginForm);
+  switchClickHandler(accountLink, contentContainer, accountContainer);
+  deleteHandler();
+  updateHandler();
 });
