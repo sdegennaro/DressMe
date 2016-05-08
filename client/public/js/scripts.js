@@ -231,6 +231,40 @@ function deleteHandler(){
   })
 }
 
+function updateHandler(){
+  $("#update-button").on("click", function(e){
+    e.preventDefault();
+    var username = $("#account-container").find("[name=username]").val();
+    var zipcode = $("#account-container").find("[name=zipcode]").val();
+    var temp_pref = $("#account-container").find("[name=temp_pref]").val();
+    var is_admin = $("#account-container").find("[name=is_admin]").val();
+    var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
+    var id
+    auth.users.getAll()
+      .done(function(users){
+        for (var i = 0; i < users.length; i++) {
+          if(users[i].username == username){
+            id = users[i]._id;
+            $.ajax({
+              url:'/api/users/'+id,
+              type: 'PUT',
+              data: {
+                username: username,
+                zipcode: zipcode,
+                temp_pref: temp_pref,
+                is_admin: is_admin,
+                text_opt_in: text_opt_in
+              },
+              success: function(){
+                console.log('updated!');
+              }
+            })
+          }
+        }
+      })
+  })
+}
+
 // auth.users.getAll()
 //   .done(function(users){
 //     auth.users.renderUsers(users);
@@ -262,4 +296,5 @@ $(function(){
   switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
   deleteHandler();
+  updateHandler();
 });

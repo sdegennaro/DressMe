@@ -30,13 +30,13 @@ usersRouter.get('/:id',function(req, res, next){
   })
 })
 
-// router.put('/:id', function(req, res, next) {
-//   console.log('updating!');
-//   var id = req.params.id;
-//   Puppy.findByIdAndUpdate(id, req.body.puppy , { new: true }, function(err, puppy) {
-//     res.json(puppy);
-//   });
-// });
+usersRouter.put('/:id', function(req, res, next) {
+  console.log('updating!');
+  var id = req.params.id;
+  User.findByIdAndUpdate(id, req.body , { new: true }, function(err, puppy) {
+    res.json(puppy);
+  });
+});
 
 usersRouter.delete('/:id/remove', function(req, res, next) {
   var id = req.params.id;
