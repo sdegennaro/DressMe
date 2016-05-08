@@ -7,12 +7,9 @@ var express             = require('express'),
     // Create a new user
 usersRouter.post('/', function(req, res, next) {
 
-User.create(req.body.user, function( err, dbUser ) {
-
+  User.create(req.body.user, function( err, dbUser ) {
   console.log(err);
   if (err) { res.status(500).end() }
-
-
   res.json( dbUser );
   });
 });
@@ -25,6 +22,12 @@ usersRouter.get('/', function(req, res, next) {
   User.find(function( err, dbUsers ){
     res.json( dbUsers );
     });
-  });
+});
+
+usersRouter.get('/:id',function(req, res, next){
+  User.find(function(err, dbUsers){
+    res.json(dbUsers);
+  })
+})
 
 module.exports = usersRouter;
