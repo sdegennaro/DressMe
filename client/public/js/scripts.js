@@ -11,8 +11,12 @@ function switchDisplay(DOMelement){
 function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMelement){
   clickElement.on('click', function(){
     switchDisplay(DOMelement);
-    switchDisplay(secondDOMelement);
-    switchDisplay(thirdDOMelement);
+    if(secondDOMelement){
+      switchDisplay(secondDOMelement);
+    };
+    if(thirdDOMelement){
+      switchDisplay(thirdDOMelement);
+    };
 
   })
 };
@@ -38,6 +42,7 @@ auth.submitLoginForm = function(){
   $.post('/api/auth', payload)
     .done(auth.loginSuccess)
     .fail(auth.loginFailure);
+
 };
 
 auth.loginSuccess = function( data, status, jqXHR){
@@ -71,6 +76,15 @@ auth.users = {
       auth.users.getAll()
         .done(function(users){
           auth.users.renderUsers(users);
+          var $form = $("#login-form");
+          var username = $form.find("[name=username]").val();
+          for (var i = 0; i < users.length; i++) {
+            if(users[i].username == username){
+              console.log(users[i]);
+              console.log(renderAccountInfo(users[i]));
+              return;
+            }
+          }
         })
         .fail( function(jqXHR){
             console.log(jqHXR);
@@ -79,6 +93,7 @@ auth.users = {
   getAll: function(){
     return $.getJSON("/api/users");
   },
+
   renderUsers: function(users){
     var $container = $("#users-container");
     users.forEach( function(user){
@@ -90,11 +105,18 @@ auth.users = {
 
 }
 
+function renderAccountInfo(userObject){
+  $("#account-container").find("[name=username]").val(userObject.username);
+  $("#account-container").find("[name=zipcode]").val(userObject.zipcode);
+  $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
+  $("#account-container").find("[name=is_admin]").val(userObject.is_admin);
+  $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
+};
+
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
       switchDisplay($("#sign-up-form"));
       switchDisplay($("#login-form"));
-
   });
 };
 
@@ -102,15 +124,12 @@ auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
     Cookies.remove("jwt_token");
     auth.checkLoggedInStatus();
-
-  } );
-}
+  });
+};
 
 auth.checkLoggedInStatus= function(){
   var token = auth.getToken();
-
   if(token){
-
     auth.setLoggedInState();
   } else {
     auth.setLoggedOutState();
@@ -129,6 +148,8 @@ auth.setLoggedOutState = function() {
     switchDisplay($('#content-container'));
     switchDisplay($('#account-container'));
   };
+  $("#login-form").find('[name=username]').val("");
+  $("#login-form").find('[name=password]').val("");
   // $('#logged-in-content').toggleClass('hidden');
   // $('#logged-in-content').toggleClass('displayed');
   // $('.forms.container').fadeIn(1000);
@@ -173,7 +194,7 @@ auth.submitSignUpForm = function(){
 };
 
 auth.signUpSuccess = function(data, status, jqXHR) {
-  console.log(data, status, jqXHR);
+  // console.log(data, status, jqXHR);
   $("#sign-up-form").toggleClass('displayed');
   $("#sign-up-form").toggleClass('hidden');
 
