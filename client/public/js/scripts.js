@@ -2,19 +2,22 @@ console.log('loaded...');
 
 var auth = auth || {};
 
-function landingCTAButtonHandler(){
-    $("#landing-cta-button").on('click',function(){
-      // hide landing page content
-      $("#landing-container").toggleClass('displayed');
-      $("#landing-container").toggleClass('hidden');
 
-      $("#sign-up-form").toggleClass('displayed');
-      $("#sign-up-form").toggleClass('hidden');
-    });
+function switchDisplay(DOMelement){
+  DOMelement.toggleClass('hidden');
+  DOMelement.toggleClass('displayed');
+};
+
+function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMelement){
+  clickElement.on('click', function(){
+    switchDisplay(DOMelement);
+    switchDisplay(secondDOMelement);
+    switchDisplay(thirdDOMelement);
+
+  })
 };
 
 auth.bindLoginForm = function(){
-
   $("#login-form").on("submit", function(e){
     e.preventDefault();
     auth.submitLoginForm();
@@ -35,7 +38,6 @@ auth.submitLoginForm = function(){
   $.post('/api/auth', payload)
     .done(auth.loginSuccess)
     .fail(auth.loginFailure);
-
 };
 
 auth.loginSuccess = function( data, status, jqXHR){
@@ -53,8 +55,7 @@ auth.setLoggedInState = function(){
   $("#login-form").toggleClass('displayed');
   $("#login-form").toggleClass('hidden');
 
-  $("#logged-in-content").toggleClass('displayed');
-  $("#logged-in-content").toggleClass('hidden');
+  switchDisplay($("#logged-in-container"))
 
   auth.users.init();
 };
@@ -91,8 +92,8 @@ auth.users = {
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
-      $("#sign-up-form, #login-form" ).toggleClass('hidden');
-      $("#sign-up-form, #login-form" ).toggleClass('displayed');
+      switchDisplay($("#sign-up-form"));
+      switchDisplay($("#login-form"));
 
   });
 };
@@ -101,8 +102,7 @@ auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
     Cookies.remove("jwt_token");
     auth.checkLoggedInStatus();
-    $('#landing-container').toggleClass('hidden');
-    $('#landing-container').toggleClass('displayed');
+
   } );
 }
 
@@ -110,25 +110,27 @@ auth.checkLoggedInStatus= function(){
   var token = auth.getToken();
 
   if(token){
+
     auth.setLoggedInState();
   } else {
     auth.setLoggedOutState();
   }
 };
 
-
 auth.getToken = function(){
   return Cookies.get("jwt_token");
-}
-
+};
 
 auth.setLoggedOutState = function() {
-  // $('#logged-in-content').hide();
-  $('#logged-in-content').toggleClass('hidden');
-  $('#logged-in-content').toggleClass('displayed');
 
-
-
+  switchDisplay($('#logged-in-container'));
+  switchDisplay($('#landing-container'));
+  if($("#content-container").hasClass('hidden')){
+    switchDisplay($('#content-container'));
+    switchDisplay($('#account-container'));
+  };
+  // $('#logged-in-content').toggleClass('hidden');
+  // $('#logged-in-content').toggleClass('displayed');
   // $('.forms.container').fadeIn(1000);
 }
 
@@ -184,11 +186,23 @@ auth.signUpFailure = function(jqXHR) {
   auth.showAlert("There was an error. Try again!");
 }
 
+
+
 $(function(){
-  auth.checkLoggedInStatus();
+  var landingCTAbutton = $("#landing-cta-button");
+  var landingContainer = $("#landing-container");
+  var signupForm = $("#sign-up-form");
+  var landingLoginLink = $("#landing-login-link");
+  var loginForm = $("#login-form");
+  var accountLink = $('#account-link');
+  var accountContainer = $('#account-container');
+  var contentContainer = $("#content-container")
+  // auth.checkLoggedInStatus();
   auth.bindLoginForm();
   auth.bindSignUpForm();
   auth.bindSwitchFormLinks();
   auth.bindLogoutLink();
-  landingCTAButtonHandler();
+  switchClickHandler(landingCTAbutton, landingContainer, signupForm);
+  switchClickHandler(landingLoginLink, landingContainer, loginForm);
+  switchClickHandler(accountLink, contentContainer, accountContainer);
 });
