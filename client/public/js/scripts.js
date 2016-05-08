@@ -80,8 +80,7 @@ auth.users = {
           var username = $form.find("[name=username]").val();
           for (var i = 0; i < users.length; i++) {
             if(users[i].username == username){
-              console.log(users[i]);
-              console.log(renderAccountInfo(users[i]));
+              renderAccountInfo(users[i]);
               return;
             }
           }
@@ -207,7 +206,43 @@ auth.signUpFailure = function(jqXHR) {
   auth.showAlert("There was an error. Try again!");
 }
 
+function deleteHandler(){
+  $("#delete-button").on("click", function(e){
+    e.preventDefault();
+    var username = $("#account-container").find("[name=username]").val();
+    var id
+    auth.users.getAll()
+      .done(function(users){
+        for (var i = 0; i < users.length; i++) {
+          if(users[i].username == username){
+            id = users[i]._id;
+            $.ajax({
+              url:'/api/users/'+id+"/remove",
+              type: 'DELETE',
+              success: function(){
+                console.log('done!');
+              }
+            })
+          }
+        }
+        Cookies.remove("jwt_token");
+        auth.checkLoggedInStatus();
+      })
+  })
+}
 
+// auth.users.getAll()
+//   .done(function(users){
+//     auth.users.renderUsers(users);
+//     var $form = $("#login-form");
+//     var username = $form.find("[name=username]").val();
+//     for (var i = 0; i < users.length; i++) {
+//       if(users[i].username == username){
+//         renderAccountInfo(users[i]);
+//         return;
+//       }
+//     }
+//   })
 
 $(function(){
   var landingCTAbutton = $("#landing-cta-button");
@@ -226,4 +261,5 @@ $(function(){
   switchClickHandler(landingCTAbutton, landingContainer, signupForm);
   switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
+  deleteHandler();
 });
