@@ -14,7 +14,7 @@ function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMele
     switchDisplay(secondDOMelement);
     switchDisplay(thirdDOMelement);
 
-  })
+  });
 };
 
 auth.bindLoginForm = function(){
@@ -22,7 +22,6 @@ auth.bindLoginForm = function(){
     e.preventDefault();
     auth.submitLoginForm();
   });
-
 };
 
 auth.submitLoginForm = function(){
@@ -60,6 +59,7 @@ auth.setLoggedInState = function(){
   auth.users.init();
 };
 
+
 auth.showAlert = function(msg){
   $("#alert-msg").text(msg).fadeIn(1000, function(){
     $(this).fadeOut(1000);
@@ -92,6 +92,7 @@ auth.users = {
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
+
       switchDisplay($("#sign-up-form"));
       switchDisplay($("#login-form"));
 
@@ -186,7 +187,18 @@ auth.signUpFailure = function(jqXHR) {
   auth.showAlert("There was an error. Try again!");
 }
 
-
+// auth.renderUserInfo = function() {
+//
+//   How can I get info from the user from the mongo database?
+//
+//   var query = $('#input').val();
+//   var key = '&key=3436ce55a40c41fc8ef154950160605';
+//   var format = '&format=json';
+//   $.getJSON('http://api.worldweatheronline.com/premium/v1/weather.ashx?q=' + query + format + key, function(data){
+// 
+//   }
+//
+// };
 
 $(function(){
   var landingCTAbutton = $("#landing-cta-button");
