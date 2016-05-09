@@ -9,8 +9,8 @@ var dotEnv          = require('dotenv').config(),
     apiAuthRouter   = require('./server/routes/api/auth.js'),
     apiUsersRouter  = require('./server/routes/api/users.js'),
 
-    ejs             = require("ejs");
-    path            = require('path'),
+    ejs             = require("ejs"),
+    path            = require('path');
 
 
     // connect to db
