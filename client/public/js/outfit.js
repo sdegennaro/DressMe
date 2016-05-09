@@ -6,10 +6,8 @@ function getrecArray(){
     type: 'GET',
     success: function(recommendations){
       console.log("got recommendation!");
-
       // returning all recs because logic isnt built in yet
       recArray = recommendations.recommendation;
-      console.log(recArray);
     }
   })
 }
@@ -36,7 +34,8 @@ function getType(tempNum, descriptionText){
 
 function renderType(object){
   newDiv = $("<div>")
-  $("#rec-container").append(newDiv)
+  newImg = $("<img src=" + object.url + ">")
+  $("#rec-container").append(newDiv, newImg)
   newDiv.text(object.text);
 };
 
