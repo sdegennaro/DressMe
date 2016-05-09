@@ -1,25 +1,46 @@
-function renderOutfit(){
+var recArray
+function getrecArray(){
   $.ajax({
     // Getting an error for url, not sure why this isnt found
     url: '/api/recommendations/',
     type: 'GET',
     success: function(recommendations){
       console.log("got recommendation!");
-      var $display = $('#outfit-container');
-      $display.empty();
+
       // returning all recs because logic isnt built in yet
-      var recArray = recommendations.recommendation;
-      console.log(recArray[1]);
-      for (var i =0; i < recArray.length; i++){
-        var outfitImage = recArray[i].url;
-        console.log(outfitImage);
-        $display.append("<img src=" + outfitImage + "/>");
-      }
+      recArray = recommendations.recommendation;
+      console.log(recArray);
     }
   })
 }
 
+function renderOutfit(){
+  var $display = $('#outfit-container');
+  $display.empty();
+  for (var i =0; i < recArray.length; i++){
+    var outfitImage = recArray[i].url;
+    console.log(outfitImage);
+
+    $display.append("<img src=" + outfitImage + ">");
+  }
+}
+
+function getType(tempNum, descriptionText){
+  for (var i = 0; i < recArray.length; i++) {
+    if(recArray[i].maxTemp >= tempNum && recArray[i].minTemp <= tempNum && recArray[i].description == descriptionText){
+      renderType(recArray[i]);
+      return;
+    };
+  };
+};
+
+function renderType(object){
+  newDiv = $("<div>")
+  $("#rec-container").append(newDiv)
+  newDiv.text(object.text);
+};
+
 
 $(function(){
-  renderOutfit();
+  getrecArray();
 })
