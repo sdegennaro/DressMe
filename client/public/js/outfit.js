@@ -2,6 +2,7 @@ function renderOutfit(){
   $.ajax({
     // Getting an error for url, not sure why this isnt found
     url: '/api/recommendations/',
+    type: 'POST',
     success: function(recommendations){
       console.log("got recommendation!");
       var $display = $('#outfit-container');
