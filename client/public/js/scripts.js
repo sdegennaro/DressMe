@@ -11,8 +11,12 @@ function switchDisplay(DOMelement){
 function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMelement){
   clickElement.on('click', function(){
     switchDisplay(DOMelement);
-    switchDisplay(secondDOMelement);
-    switchDisplay(thirdDOMelement);
+    if(secondDOMelement){
+      switchDisplay(secondDOMelement);
+    };
+    if(thirdDOMelement){
+      switchDisplay(thirdDOMelement);
+    };
 
   });
 };
@@ -37,6 +41,7 @@ auth.submitLoginForm = function(){
   $.post('/api/auth', payload)
     .done(auth.loginSuccess)
     .fail(auth.loginFailure);
+
 };
 
 auth.loginSuccess = function( data, status, jqXHR){
@@ -71,6 +76,14 @@ auth.users = {
       auth.users.getAll()
         .done(function(users){
           auth.users.renderUsers(users);
+          var $form = $("#login-form");
+          var username = $form.find("[name=username]").val();
+          for (var i = 0; i < users.length; i++) {
+            if(users[i].username == username){
+              renderAccountInfo(users[i]);
+              return;
+            }
+          }
         })
         .fail( function(jqXHR){
             console.log(jqHXR);
@@ -79,6 +92,7 @@ auth.users = {
   getAll: function(){
     return $.getJSON("/api/users");
   },
+
   renderUsers: function(users){
     var $container = $("#users-container");
     users.forEach( function(user){
@@ -90,12 +104,19 @@ auth.users = {
 
 }
 
+function renderAccountInfo(userObject){
+  $("#account-container").find("[name=username]").val(userObject.username);
+  $("#account-container").find("[name=zipcode]").val(userObject.zipcode);
+  $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
+  $("#account-container").find("[name=is_admin]").val(userObject.is_admin);
+  $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
+};
+
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
 
       switchDisplay($("#sign-up-form"));
       switchDisplay($("#login-form"));
-
   });
 };
 
@@ -103,15 +124,12 @@ auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
     Cookies.remove("jwt_token");
     auth.checkLoggedInStatus();
-
-  } );
-}
+  });
+};
 
 auth.checkLoggedInStatus= function(){
   var token = auth.getToken();
-
   if(token){
-
     auth.setLoggedInState();
   } else {
     auth.setLoggedOutState();
@@ -130,6 +148,8 @@ auth.setLoggedOutState = function() {
     switchDisplay($('#content-container'));
     switchDisplay($('#account-container'));
   };
+  $("#login-form").find('[name=username]').val("");
+  $("#login-form").find('[name=password]').val("");
   // $('#logged-in-content').toggleClass('hidden');
   // $('#logged-in-content').toggleClass('displayed');
   // $('.forms.container').fadeIn(1000);
@@ -174,7 +194,7 @@ auth.submitSignUpForm = function(){
 };
 
 auth.signUpSuccess = function(data, status, jqXHR) {
-  console.log(data, status, jqXHR);
+  // console.log(data, status, jqXHR);
   $("#sign-up-form").toggleClass('displayed');
   $("#sign-up-form").toggleClass('hidden');
 
@@ -195,10 +215,97 @@ auth.signUpFailure = function(jqXHR) {
 //   var key = '&key=3436ce55a40c41fc8ef154950160605';
 //   var format = '&format=json';
 //   $.getJSON('http://api.worldweatheronline.com/premium/v1/weather.ashx?q=' + query + format + key, function(data){
-// 
+//
 //   }
 //
 // };
+
+function deleteHandler(){
+  $("#delete-button").on("click", function(e){
+    e.preventDefault();
+    var username = $("#account-container").find("[name=username]").val();
+    var id
+    auth.users.getAll()
+      .done(function(users){
+        for (var i = 0; i < users.length; i++) {
+          if(users[i].username == username){
+            id = users[i]._id;
+            $.ajax({
+              url:'/api/users/'+id+"/remove",
+              type: 'DELETE',
+              success: function(){
+                console.log('done!');
+              }
+            })
+          }
+        }
+        Cookies.remove("jwt_token");
+        auth.checkLoggedInStatus();
+      })
+  })
+}
+
+
+
+function updateHandler(){
+  $("#update-button").on("click", function(e){
+    e.preventDefault();
+    var username = $("#account-container").find("[name=username]").val();
+    var zipcode = $("#account-container").find("[name=zipcode]").val();
+    var temp_pref = $("#account-container").find("[name=temp_pref]").val();
+    var is_admin = $("#account-container").find("[name=is_admin]").val();
+    var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
+    var id
+    auth.users.getAll()
+      .done(function(users){
+        for (var i = 0; i < users.length; i++) {
+          if(users[i].username == username){
+            id = users[i]._id;
+            $.ajax({
+              url:'/api/users/'+id,
+              type: 'PUT',
+              data: {
+                username: username,
+                zipcode: zipcode,
+                temp_pref: temp_pref,
+                is_admin: is_admin,
+                text_opt_in: text_opt_in
+              },
+              success: function(){
+                console.log('updated!');
+              }
+            })
+          }
+        }
+      })
+  })
+}
+
+function accountLinkHandler(){
+  var accountLink = $("#account-link");
+  accountLink.on('click',function(){
+    if(accountLink.text() == "My Account"){
+      accountLink.text("My Forecast")
+    } else{
+      accountLink.text("My Account")
+    };
+  })
+}
+
+function testSMS(){
+
+  $.getJSON("https://api.sendhub.com/v1/messages/?username=+12039961626&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",{
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    type: "POST",
+    dataType:'json',
+    data: {
+      "contacts":["+2039961626"],
+      "text":"New Test"
+    }
+  })
+}
 
 $(function(){
   var landingCTAbutton = $("#landing-cta-button");
@@ -217,4 +324,7 @@ $(function(){
   switchClickHandler(landingCTAbutton, landingContainer, signupForm);
   switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
+  deleteHandler();
+  updateHandler();
+  accountLinkHandler();
 });
