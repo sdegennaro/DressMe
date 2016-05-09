@@ -231,6 +231,8 @@ function deleteHandler(){
   })
 }
 
+
+
 function updateHandler(){
   $("#update-button").on("click", function(e){
     e.preventDefault();
@@ -265,18 +267,31 @@ function updateHandler(){
   })
 }
 
-// auth.users.getAll()
-//   .done(function(users){
-//     auth.users.renderUsers(users);
-//     var $form = $("#login-form");
-//     var username = $form.find("[name=username]").val();
-//     for (var i = 0; i < users.length; i++) {
-//       if(users[i].username == username){
-//         renderAccountInfo(users[i]);
-//         return;
-//       }
-//     }
-//   })
+function accountLinkHandler(){
+  var accountLink = $("#account-link");
+  accountLink.on('click',function(){
+    if(accountLink.text() == "My Account"){
+      accountLink.text("My Forecast")
+    } else{
+      accountLink.text("My Account")
+    };
+  })
+}
+
+function testSMS(){
+
+  $.getJSON("https://api.sendhub.com/v1/messages/?username=+12039961626&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",{
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    type: "POST",
+    dataType:'json',
+    data: {
+      "contacts":["+2039961626"],
+      "text":"New Test"
+    }
+  })
+}
 
 $(function(){
   var landingCTAbutton = $("#landing-cta-button");
@@ -297,4 +312,5 @@ $(function(){
   switchClickHandler(accountLink, contentContainer, accountContainer);
   deleteHandler();
   updateHandler();
+  accountLinkHandler();
 });
