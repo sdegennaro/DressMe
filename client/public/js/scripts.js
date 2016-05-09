@@ -18,7 +18,7 @@ function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMele
       switchDisplay(thirdDOMelement);
     };
 
-  })
+  });
 };
 
 auth.bindLoginForm = function(){
@@ -26,7 +26,6 @@ auth.bindLoginForm = function(){
     e.preventDefault();
     auth.submitLoginForm();
   });
-
 };
 
 auth.submitLoginForm = function(){
@@ -64,6 +63,7 @@ auth.setLoggedInState = function(){
 
   auth.users.init();
 };
+
 
 auth.showAlert = function(msg){
   $("#alert-msg").text(msg).fadeIn(1000, function(){
@@ -114,6 +114,7 @@ function renderAccountInfo(userObject){
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
+
       switchDisplay($("#sign-up-form"));
       switchDisplay($("#login-form"));
   });
