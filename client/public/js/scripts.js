@@ -206,6 +206,19 @@ auth.signUpFailure = function(jqXHR) {
   auth.showAlert("There was an error. Try again!");
 }
 
+// auth.renderUserInfo = function() {
+//
+//   How can I get info from the user from the mongo database?
+//
+//   var query = $('#input').val();
+//   var key = '&key=3436ce55a40c41fc8ef154950160605';
+//   var format = '&format=json';
+//   $.getJSON('http://api.worldweatheronline.com/premium/v1/weather.ashx?q=' + query + format + key, function(data){
+//
+//   }
+//
+// };
+
 function deleteHandler(){
   $("#delete-button").on("click", function(e){
     e.preventDefault();
@@ -278,18 +291,50 @@ function accountLinkHandler(){
   })
 }
 
-function testSMS(){
+function testSendSMS(){
 
-  $.getJSON("https://api.sendhub.com/v1/messages/?username=+12039961626&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",{
+  $.ajax({
+    url: "https://api.sendhub.com/v1/messages/?username=+12039961626&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",
     headers: {
-      "Content-Type" : "application/json"
+      "Content-Type": "application/json ",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST'
+
     },
     type: "POST",
-    dataType:'json',
+    dataType:'jsonp',
     data: {
       "contacts":["+2039961626"],
       "text":"New Test"
+    },
+    success:function(){
+      console.log('success');
+    },
+    error:function(err){
+      console.log(err);
     }
+
+  })
+}
+
+function getSMSContacts(){
+
+  $.ajax({
+    url: "https://api.sendhub.com/v1/contacts/?username=+12037797398&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",
+    headers: {
+      "Content-Type": "application/json ",
+      'Access-Control-Allow-Origin': '*',
+
+    },
+    type: "GET",
+    dataType:'jsonp',
+    success:function(data){
+      console.log('success got ' + data);
+    },
+    error:function(err){
+      console.log(err);
+    }
+
   })
 }
 
