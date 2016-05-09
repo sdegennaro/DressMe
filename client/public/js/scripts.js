@@ -56,11 +56,8 @@ auth.loginFailure = function(jqXHR){
 };
 
 auth.setLoggedInState = function(){
-  $("#login-form").toggleClass('displayed');
-  $("#login-form").toggleClass('hidden');
-
+  switchDisplay($("#login-form"));
   switchDisplay($("#logged-in-container"))
-
   auth.users.init();
 };
 
@@ -75,7 +72,7 @@ auth.users = {
   init: function(){
       auth.users.getAll()
         .done(function(users){
-          auth.users.renderUsers(users);
+          // auth.users.renderUsers(users);
           var $form = $("#login-form");
           var username = $form.find("[name=username]").val();
           for (var i = 0; i < users.length; i++) {
@@ -93,14 +90,14 @@ auth.users = {
     return $.getJSON("/api/users");
   },
 
-  renderUsers: function(users){
-    var $container = $("#users-container");
-    users.forEach( function(user){
-      var $user = $("<li>");
-      $user.html("Username: " + user.username + " <br/> Email: " + user.email );
-      $container.append($user);
-    });
-  }
+  // renderUsers: function(users){
+  //   var $container = $("#users-container");
+  //   users.forEach( function(user){
+  //     var $user = $("<li>");
+  //     $user.html("Username: " + user.username + " <br/> Email: " + user.email );
+  //     $container.append($user);
+  //   });
+  // }
 
 }
 
@@ -110,6 +107,11 @@ function renderAccountInfo(userObject){
   $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
   $("#account-container").find("[name=is_admin]").val(userObject.is_admin);
   $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
+  getUserZipcode();
+  makeQueryLink(userZipcode,"json",2);
+  askTheWeather("GET", queryURL);
+  getType(85,"Sunny");
+
 };
 
 auth.bindSwitchFormLinks = function(){
@@ -135,6 +137,20 @@ auth.checkLoggedInStatus= function(){
     auth.setLoggedOutState();
   }
 };
+var myData
+function userTest(){
+  $.ajax({
+    url: "/api/users/me",
+    type: "GET",
+    success: function(data){
+      console.log(data);
+      myData = data;
+    }
+
+  })
+}
+
+
 
 auth.getToken = function(){
   return Cookies.get("jwt_token");
@@ -195,11 +211,8 @@ auth.submitSignUpForm = function(){
 
 auth.signUpSuccess = function(data, status, jqXHR) {
   // console.log(data, status, jqXHR);
-  $("#sign-up-form").toggleClass('displayed');
-  $("#sign-up-form").toggleClass('hidden');
-
-  $("#login-form").toggleClass('displayed');
-  $("#login-form").toggleClass('hidden');
+  switchDisplay($("#sign-up-form"));
+  switchDisplay($("#login-form"));
   // should show a success alert
 }
 
@@ -243,9 +256,7 @@ function deleteHandler(){
         auth.checkLoggedInStatus();
       })
   })
-}
-
-
+};
 
 function updateHandler(){
   $("#update-button").on("click", function(e){

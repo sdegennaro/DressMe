@@ -14,6 +14,7 @@ usersRouter.post('/', function(req, res, next) {
   });
 });
 
+// blocks non logged in
 usersRouter.use(passport.authenticate('jwt', { session: false}));
 
     // GET all users
@@ -22,13 +23,18 @@ usersRouter.get('/', function(req, res, next) {
   User.find(function( err, dbUsers ){
     res.json( dbUsers );
     });
+
 });
 
-usersRouter.get('/:id',function(req, res, next){
-  User.find(function(err, dbUsers){
-    res.json(dbUsers);
-  })
-})
+usersRouter.get('/me', function(req, res, next) {
+  res.json( req.user );
+});
+
+// usersRouter.get('/:id',function(req, res, next){
+//   User.find(function(err, dbUsers){
+//     res.json(dbUsers);
+//   })
+// })
 
 usersRouter.put('/:id', function(req, res, next) {
   console.log('updating!');
