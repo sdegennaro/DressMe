@@ -126,9 +126,6 @@ auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
     Cookies.remove("jwt_token");
     auth.checkLoggedInStatus();
-    $('#morning-forecast').find('p').empty();
-    $("#midday-forecast").find('p').empty();
-    $("#evening-forecast").find('p').empty();
   });
 };
 
@@ -270,6 +267,7 @@ function updateHandler(){
     var is_admin = $("#account-container").find("[name=is_admin]").val();
     var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
     var id
+
     auth.users.getAll()
       .done(function(users){
         for (var i = 0; i < users.length; i++) {
@@ -290,7 +288,7 @@ function updateHandler(){
               }
             })
           }
-        }
+        }s
       })
   })
 }
