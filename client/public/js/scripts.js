@@ -125,6 +125,17 @@ auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
     Cookies.remove("jwt_token");
     auth.checkLoggedInStatus();
+
+    $('#morning-forecast').find('p').remove();
+    $('#morning-forecast').find('img').remove();
+    $("#midday-forecast").find('p').remove();
+    $("#midday-forecast").find('img').remove();
+    $("#evening-forecast").find('p').remove();
+    $("#evening-forecast").find('img').remove();
+    $('#rec-container').find('img').remove();
+    // Trying to remove the text but can't select it
+    // $('#rec-container').find('div').remove();
+
   });
 };
 
@@ -297,8 +308,11 @@ function updateHandler(){
           }
         }s
       })
+      switchDisplay($('#content-container'));
+      switchDisplay($('#account-container'));
   })
 }
+
 
 function accountLinkHandler(){
   var accountLink = $("#account-link");
@@ -378,4 +392,5 @@ $(function(){
   deleteHandler();
   updateHandler();
   accountLinkHandler();
+
 });
