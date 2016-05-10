@@ -18,7 +18,7 @@ function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMele
       switchDisplay(thirdDOMelement);
     };
 
-  })
+  });
 };
 
 auth.bindLoginForm = function(){
@@ -26,7 +26,6 @@ auth.bindLoginForm = function(){
     e.preventDefault();
     auth.submitLoginForm();
   });
-
 };
 
 auth.submitLoginForm = function(){
@@ -57,13 +56,11 @@ auth.loginFailure = function(jqXHR){
 };
 
 auth.setLoggedInState = function(){
-  $("#login-form").toggleClass('displayed');
-  $("#login-form").toggleClass('hidden');
-
+  switchDisplay($("#login-form"));
   switchDisplay($("#logged-in-container"))
-
   auth.users.init();
 };
+
 
 auth.showAlert = function(msg){
   $("#alert-msg").text(msg).fadeIn(1000, function(){
@@ -75,7 +72,7 @@ auth.users = {
   init: function(){
       auth.users.getAll()
         .done(function(users){
-          auth.users.renderUsers(users);
+          // auth.users.renderUsers(users);
           var $form = $("#login-form");
           var username = $form.find("[name=username]").val();
           for (var i = 0; i < users.length; i++) {
@@ -93,14 +90,14 @@ auth.users = {
     return $.getJSON("/api/users");
   },
 
-  renderUsers: function(users){
-    var $container = $("#users-container");
-    users.forEach( function(user){
-      var $user = $("<li>");
-      $user.html("Username: " + user.username + " <br/> Email: " + user.email );
-      $container.append($user);
-    });
-  }
+  // renderUsers: function(users){
+  //   var $container = $("#users-container");
+  //   users.forEach( function(user){
+  //     var $user = $("<li>");
+  //     $user.html("Username: " + user.username + " <br/> Email: " + user.email );
+  //     $container.append($user);
+  //   });
+  // }
 
 }
 
@@ -110,10 +107,16 @@ function renderAccountInfo(userObject){
   $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
   $("#account-container").find("[name=is_admin]").val(userObject.is_admin);
   $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
+  getUserZipcode();
+  makeQueryLink(userZipcode,"json",2);
+  askTheWeather("GET", queryURL);
+  getType(85,"Sunny");
+
 };
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
+
       switchDisplay($("#sign-up-form"));
       switchDisplay($("#login-form"));
   });
@@ -134,6 +137,20 @@ auth.checkLoggedInStatus= function(){
     auth.setLoggedOutState();
   }
 };
+var myData
+function userTest(){
+  $.ajax({
+    url: "/api/users/me",
+    type: "GET",
+    success: function(data){
+      console.log(data);
+      myData = data;
+    }
+
+  })
+}
+
+
 
 auth.getToken = function(){
   return Cookies.get("jwt_token");
@@ -194,17 +211,27 @@ auth.submitSignUpForm = function(){
 
 auth.signUpSuccess = function(data, status, jqXHR) {
   // console.log(data, status, jqXHR);
-  $("#sign-up-form").toggleClass('displayed');
-  $("#sign-up-form").toggleClass('hidden');
-
-  $("#login-form").toggleClass('displayed');
-  $("#login-form").toggleClass('hidden');
+  switchDisplay($("#sign-up-form"));
+  switchDisplay($("#login-form"));
   // should show a success alert
 }
 
 auth.signUpFailure = function(jqXHR) {
   auth.showAlert("There was an error. Try again!");
 }
+
+// auth.renderUserInfo = function() {
+//
+//   How can I get info from the user from the mongo database?
+//
+//   var query = $('#input').val();
+//   var key = '&key=3436ce55a40c41fc8ef154950160605';
+//   var format = '&format=json';
+//   $.getJSON('http://api.worldweatheronline.com/premium/v1/weather.ashx?q=' + query + format + key, function(data){
+//
+//   }
+//
+// };
 
 function deleteHandler(){
   $("#delete-button").on("click", function(e){
@@ -229,7 +256,7 @@ function deleteHandler(){
         auth.checkLoggedInStatus();
       })
   })
-}
+};
 
 function updateHandler(){
   $("#update-button").on("click", function(e){
@@ -265,18 +292,63 @@ function updateHandler(){
   })
 }
 
-// auth.users.getAll()
-//   .done(function(users){
-//     auth.users.renderUsers(users);
-//     var $form = $("#login-form");
-//     var username = $form.find("[name=username]").val();
-//     for (var i = 0; i < users.length; i++) {
-//       if(users[i].username == username){
-//         renderAccountInfo(users[i]);
-//         return;
-//       }
-//     }
-//   })
+function accountLinkHandler(){
+  var accountLink = $("#account-link");
+  accountLink.on('click',function(){
+    if(accountLink.text() == "My Account"){
+      accountLink.text("My Forecast")
+    } else{
+      accountLink.text("My Account")
+    };
+  })
+}
+
+function testSendSMS(){
+
+  $.ajax({
+    url: "https://api.sendhub.com/v1/messages/?username=+12039961626&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",
+    headers: {
+      "Content-Type": "application/json ",
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST'
+
+    },
+    type: "POST",
+    dataType:'jsonp',
+    data: {
+      "contacts":["+2039961626"],
+      "text":"New Test"
+    },
+    success:function(){
+      console.log('success');
+    },
+    error:function(err){
+      console.log(err);
+    }
+
+  })
+}
+
+function getSMSContacts(){
+
+  $.ajax({
+    url: "https://api.sendhub.com/v1/contacts/?username=+12037797398&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",
+    headers: {
+      "Content-Type": "application/json ",
+      'Access-Control-Allow-Origin': '*',
+
+    },
+    type: "GET",
+    dataType:'jsonp',
+    success:function(data){
+      console.log('success got ' + data);
+    },
+    error:function(err){
+      console.log(err);
+    }
+
+  })
+}
 
 $(function(){
   var landingCTAbutton = $("#landing-cta-button");
@@ -297,4 +369,5 @@ $(function(){
   switchClickHandler(accountLink, contentContainer, accountContainer);
   deleteHandler();
   updateHandler();
+  accountLinkHandler();
 });

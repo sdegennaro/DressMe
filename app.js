@@ -8,9 +8,9 @@ var dotEnv          = require('dotenv').config(),
     indexRouter     = require('./server/routes/index.js'),
     apiAuthRouter   = require('./server/routes/api/auth.js'),
     apiUsersRouter  = require('./server/routes/api/users.js'),
-
-    ejs             = require("ejs");
-    path            = require('path'),
+    apiRecRouter  = require('./server/routes/api/recommendations.js'),
+    ejs             = require("ejs"),
+    path            = require('path');
 
 
     // connect to db
@@ -38,7 +38,7 @@ app.set('views', path.join(__dirname, 'client/public/views'));
 app.use('/', indexRouter);
 app.use('/api/auth', apiAuthRouter);
 app.use('/api/users', apiUsersRouter);
-
+app.use('/api/recommendations', apiRecRouter);
 
 
 var port = process.env.PORT || 3000;
