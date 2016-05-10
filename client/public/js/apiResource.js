@@ -16,6 +16,10 @@ function getKey(){
 }
 
 function getUserZipcode(){
+  $('#update-button').click(function(){
+    userZipcode = $("#account-container").find("[name=zipcode]").val()
+    $('#current-weather-container').html('<h3>Today in ' + userZipcode + '</h3>');
+  });
   userZipcode = $("#account-container").find("[name=zipcode]").val()
   $('#current-weather-container').html('<h3>Today in ' + userZipcode + '</h3>');
 }
