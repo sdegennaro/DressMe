@@ -9,10 +9,10 @@ var authToken = process.env.TWILIO_AUTHTOKEN;
 var client = require('twilio')(accountSid, authToken);
 
 
-router.get('/test',function(req, res, next){
+router.post('/test',function(req, res, next){
   client.messages.create({
-    body: "heyooo!",
-    to: "+12039961626",
+    body: req.body.message,
+    to: req.body.to,
     from: "+12038899355"
   }, function(err, message) {
     if(err){
