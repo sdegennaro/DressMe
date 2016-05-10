@@ -1,0 +1,70 @@
+body{
+  background-image: url("/images/background.jpg");
+  background-size: cover;
+}
+
+.hidden{
+  display: none;
+}
+
+.displayed{
+  display:block;
+}
+
+h1 {
+  color: yellow;
+}
+#landing-container {
+  background-color: rgba(0,0,0,.8);
+  width: 60%;
+  padding: 3em;
+  margin: auto;
+  text-align: center;
+  margin-top: 20%;
+  color: white;
+}
+
+#sign-up-form {
+  background-color: rgba(0,0,0,.8);
+  width: 60%;
+  padding: 3em;
+  margin: auto;
+  text-align: center;
+  margin-top: 10%;
+  color: black;
+}
+
+#login-form {
+  background-color: rgba(0,0,0,.8);
+  width: 60%;
+  padding: 3em;
+  margin: auto;
+  text-align: center;
+  margin-top: 10%;
+  color: black;
+}
+
+#account-container {
+  background-color: rgba(0,0,0,.8);
+  width: 60%;
+  padding: 3em;
+  margin: auto;
+  text-align: center;
+  margin-top: 10%;
+  color: black;;
+}
+
+#logged-in-container {
+  z-index: 1;
+  background-color: white;
+  text-align: center;
+}
+
+input {
+  margin: .5em;
+}
+
+button {
+  color: black;
+  margin: .5em;
+}
