@@ -41,6 +41,8 @@ function askTheWeather(method, link, payload){
     url: link,
     success: function(data){
       getTodayInfo(data.data);
+      checkForRain(data.data.weather[0].hourly);
+      checkForSnow(data.data.weather[0].hourly);
     }
   });
 }
@@ -58,6 +60,31 @@ function getTodayInfo(object){
   // renderTodayInfo(morningIcon,$('#morning-forecast'))
 };
 
+function checkForRain(hourly){
+  var willRain = false;
+  for (var i = 0; i<hourly.length; i ++){
+    if ( hourly[i].chanceofrain > 40) {
+      console.log(hourly[i].chanceofrain + "is greater than 40")
+      var willRain = true;
+    }
+  }
+  console.log("Rain? " + willRain);
+  return willRain;
+}
+
+function checkForSnow(hourly){
+  var willSnow = false;
+  console.log(hourly);
+  for (var i = 0; i<hourly.length; i ++){
+    if ( hourly[i].chanceofsnow > 10) {
+      console.log(hourly[i].chanceofsnow + "is greater than 10")
+      var willSnow = true;
+    }
+  }
+  console.log("Snow? " + willSnow);
+  return willSnow;
+}
+
 function renderTodayInfo(object, parentElement){
 
   var tempP = $("<p>").text("Temp: "+ object.tempF + " °F");
@@ -66,7 +93,6 @@ function renderTodayInfo(object, parentElement){
   var weatherIcon = $('<img>').attr('src', object.weatherIconUrl[0].value);
   var weatherDesc = $('<p>').text("Weather description: " + object.weatherDesc[0].value);
   parentElement.append(tempP,humidityP, feelsLikeP, weatherDesc, weatherIcon);
-  console.log("Today's weather" + tempP);
   // ask Sam why this works lol
 };
 
