@@ -109,7 +109,6 @@ function renderAccountInfo(userObject){
   getUserZipcode();
   makeQueryLink(userZipcode,"json",2);
   askTheWeather("GET", queryURL);
-  getType(85,"Sunny");
 
 };
 
