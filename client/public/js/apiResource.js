@@ -17,6 +17,7 @@ function getKey(){
 
 function getUserZipcode(){
   userZipcode = $("#account-container").find("[name=zipcode]").val()
+  $('#current-weather-container').html('<h3>Today in ' + userZipcode + '</h3>');
 }
 
 function makeBaseLink(keyString){
@@ -50,19 +51,24 @@ function getTodayInfo(object){
   renderTodayInfo(morning,$("#morning-forecast"))
   renderTodayInfo(midday,$("#midday-forecast"))
   renderTodayInfo(evening,$("#evening-forecast"))
+  // renderTodayInfo(morningIcon,$('#morning-forecast'))
 };
 
 function renderTodayInfo(object, parentElement){
-  var tempP = $("<p>").text("Temp: "+ object.tempF);
-  var humidityP = $("<p>").text("Humidity: "+ object.humidity);
-  var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF);
-  parentElement.append(tempP,humidityP, feelsLikeP);
+
+  var tempP = $("<p>").text("Temp: "+ object.tempF + " °F");
+  var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
+  var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF + " °F");
+  var weatherIcon = $('<img>').attr('src', object.weatherIconUrl[0].value);
+  var weatherDesc = $('<p>').text("Weather description: " + object.weatherDesc[0].value);
+  parentElement.append(tempP,humidityP, feelsLikeP, weatherDesc, weatherIcon);
+  // ask Sam why this works lol
 };
 
-function renderCurrentInfo(object){
-  var current = object.current_condition[0]
-  console.log(current.temp_F);
-};
+// function renderCurrentInfo(object){
+//   var current = object.current_condition[0]
+//   console.log(current.temp_F);
+// };
 
 // auth.renderUserInfo = function() {
 //
