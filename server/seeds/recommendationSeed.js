@@ -1,76 +1,184 @@
 var recommendationArray = [
       {
-        name: "sunny, male",
-        description: "Sunny",
+        name: "men-1",
         gender: "male",
+        rain: false,
+        snow: false,
         minTemp: 80,
         maxTemp: 90,
-        url: "https://t1.ftcdn.net/jpg/00/55/12/64/160_F_55126421_UkxlTpL0Ost5O0UG1uYfPSY67yXvlpb6.jpg",
+        outfit: "https://t1.ftcdn.net/jpg/00/55/12/64/1pg",
         text: "Hey Dude! It's crazy hot today. Wear as little as possible."
       },
       {
-        name: "cloudy, male",
-        description: "Cloudy",
+        name: "men-2",
         gender: "male",
+        rain: false,
+        snow: false,
         minTemp: 60,
         maxTemp: 80,
         url: "http://blogs.worldbank.org/files/ic4d/01cloudy-t9953.jpg",
         text: "Hey Dude! It's cloudy today. Wear a hoodie."
       },
       {
-        name: "rainy, male",
-        description: "Rain",
+        name: "men-3",
         gender: "male",
+        rain: false,
+        snow: false,
         minTemp: 50,
         maxTemp: 70,
         url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
         text: "Hey Dude! It's raining like cats and dogs. Don't forget your umbrella."
       },
       {
-        name: "snoy, male",
-        description: "Snow",
+        name: "men-4",
         gender: "male",
+        rain: false,
+        snow: false,
         minTemp: 0,
         maxTemp: 50,
         url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
         text: "Hey Dude! It's snowing! Wear your heavist coat."
       },
       {
-        name: "sunny, female",
-        description: "Sunny",
-        gender: "female",
+        name: "men-5",
+        gender: "male",
+        rain: false,
+        snow: false,
         minTemp: 80,
         maxTemp: 90,
         url: "https://t1.ftcdn.net/jpg/00/55/12/64/160_F_55126421_UkxlTpL0Ost5O0UG1uYfPSY67yXvlpb6.jpg",
         text: "Hey Girl! It's crazy hot today. Wear as little as possible."
       },
       {
-        name: "cloudy, female",
-        description: "Cloudy",
-        gender: "female",
+        name: "men-6",
+        gender: "male",
+        rain: false,
+        snow: false,
         minTemp: 60,
         maxTemp: 80,
         url: "http://blogs.worldbank.org/files/ic4d/01cloudy-t9953.jpg",
         text: "Hey Girl! It's cloudy today. Wear a hoodie."
       },
       {
-        name: "rainy, female",
-        description: "Rain",
-        gender: "female",
+        name: "men-7",
+        gender: "male",
+        rain: false,
+        snow: false,
         minTemp: 50,
         maxTemp: 70,
         url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
         text: "Hey Girl! It's raining like cats and dogs. Don't forget your umbrella."
       },
       {
-        name: "rainy, female",
-        description: "Snow",
-        gender: "female",
+        name: "men-8",
+        gender: "male",
+        rain: false,
+        snow: false,
         minTemp: 0,
         maxTemp: 50,
         url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
         text: "Hey Girl! It's snowing! Wear your heavist coat."
-      }
+      },
+      {
+        name: "men-9",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 50,
+        maxTemp: 70,
+        url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
+        text: "Hey Girl! It's raining like cats and dogs. Don't forget your umbrella."
+      },
+      {
+        name: "men-10",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 0,
+        maxTemp: 50,
+        url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
+        text: "Hey Girl! It's snowing! Wear your heavist coat."
+      },
+      {
+        name: "men-11",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 80,
+        maxTemp: 90,
+        outfit: "https://t1.ftcdn.net/jpg/00/55/12/64/1pg",
+        text: "Hey Dude! It's crazy hot today. Wear as little as possible."
+      },
+      {
+        name: "men-12",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 60,
+        maxTemp: 80,
+        url: "http://blogs.worldbank.org/files/ic4d/01cloudy-t9953.jpg",
+        text: "Hey Dude! It's cloudy today. Wear a hoodie."
+      },
+      {
+        name: "men-13",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 50,
+        maxTemp: 70,
+        url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
+        text: "Hey Dude! It's raining like cats and dogs. Don't forget your umbrella."
+      },
+      {
+        name: "men-14",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 0,
+        maxTemp: 50,
+        url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
+        text: "Hey Dude! It's snowing! Wear your heavist coat."
+      },
+      {
+        name: "men-15",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 80,
+        maxTemp: 90,
+        url: "https://t1.ftcdn.net/jpg/00/55/12/64/160_F_55126421_UkxlTpL0Ost5O0UG1uYfPSY67yXvlpb6.jpg",
+        text: "Hey Girl! It's crazy hot today. Wear as little as possible."
+      },
+      {
+        name: "men-16",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 60,
+        maxTemp: 80,
+        url: "http://blogs.worldbank.org/files/ic4d/01cloudy-t9953.jpg",
+        text: "Hey Girl! It's cloudy today. Wear a hoodie."
+      },
+      {
+        name: "men-17",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 50,
+        maxTemp: 70,
+        url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
+        text: "Hey Girl! It's raining like cats and dogs. Don't forget your umbrella."
+      },
+      {
+        name: "men-18",
+        gender: "male",
+        rain: false,
+        snow: false,
+        minTemp: 0,
+        maxTemp: 50,
+        url: "http://www.vectorportal.com/img_novi/rainy3_7188.jpg",
+        text: "Hey Girl! It's snowing! Wear your heavist coat."
+      },
   ]
 
   var mongoose = require('mongoose');
