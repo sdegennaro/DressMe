@@ -2,7 +2,6 @@ console.log('loaded...');
 
 var auth = auth || {};
 
-
 function switchDisplay(DOMelement){
   DOMelement.toggleClass('hidden');
   DOMelement.toggleClass('displayed');
@@ -193,6 +192,14 @@ auth.submitSignUpForm = function(){
 
   if (confirm !== password) {
     return auth.showAlert("Passwords do not match!");
+  }
+
+  if (username.length !== 10) {
+    return auth.showAlert("Username isn't 10 characters");
+  }
+
+  if(zipcode.length !== 5) {
+    return auth.showAlert("Zipcode isn't 5 characters");
   }
 
   var payload = {
