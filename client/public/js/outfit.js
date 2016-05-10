@@ -12,16 +12,6 @@ function getrecArray(){
   })
 }
 
-function renderOutfit(){
-  var $display = $('#outfit-container');
-  $display.empty();
-  for (var i =0; i < recArray.length; i++){
-    var outfitImage = recArray[i].url;
-    console.log(outfitImage);
-
-    $display.append("<img src=" + outfitImage + ">");
-  }
-}
 
 function getType(tempNum, descriptionText){
   for (var i = 0; i < recArray.length; i++) {
