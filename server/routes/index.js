@@ -2,6 +2,29 @@ var express = require("express");
 var router = express.Router();
 
 var path = require('path');
+var twilio          = require("twilio");
+
+var accountSid = process.env.TWILIO_ACCOUNTSID;
+var authToken = process.env.TWILIO_AUTHTOKEN;
+var client = require('twilio')(accountSid, authToken);
+
+
+router.get('/test',function(req, res, next){
+  client.messages.create({
+    body: "heyooo!",
+    to: "+12039961626",
+    from: "+12038899355"
+  }, function(err, message) {
+    if(err){
+      console.log(err);
+    }else{
+    process.stdout.write(message.sid);
+    console.log(" yoooo");
+  }
+  });
+})
+
+
 
 // SAM- this is from template, downloads a file of the view rather than rendering it.
 // router.get('/', function(req, res, next) {
@@ -15,6 +38,7 @@ router.get('/', function(req, res, next) {
 router.get('/key',function(req,res,next){
   res.json({API_KEY: process.env.WEATHER_API_KEY})
 })
+
 
 
 module.exports = router;

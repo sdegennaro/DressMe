@@ -11,7 +11,7 @@ var dotEnv          = require('dotenv').config(),
     apiRecRouter  = require('./server/routes/api/recommendations.js'),
     ejs             = require("ejs"),
     path            = require('path');
-
+var twilio          = require("twilio");
 
     // connect to db
     // process.env.MONGOLAB_URI is needed for when we deploy to Heroku
