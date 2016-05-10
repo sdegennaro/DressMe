@@ -15,7 +15,7 @@ var twilio          = require("twilio");
 
     // connect to db
     // process.env.MONGOLAB_URI is needed for when we deploy to Heroku
-mongoose.connect( process.env.MONGOLAB_URI || "mongodb://localhost/dressme_app" );
+mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/dressme_app" );
 app.use(morgan('dev'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
