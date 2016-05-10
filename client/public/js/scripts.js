@@ -126,6 +126,9 @@ auth.bindLogoutLink = function(){
   $("#log-out-link").on("click", function(e){
     Cookies.remove("jwt_token");
     auth.checkLoggedInStatus();
+    $('#morning-forecast').find('p').empty();
+    $("#midday-forecast").find('p').empty();
+    $("#evening-forecast").find('p').empty();
   });
 };
 
