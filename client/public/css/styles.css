@@ -1,5 +1,6 @@
 body{
-  background: lightgrey;
+  background-image: url("/images/background.jpg");
+  background-size: cover;
 }
 
 .hidden{
@@ -8,4 +9,14 @@ body{
 
 .displayed{
   display:block;
+}
+
+#landing-container {
+  background-color: rgba(0,0,0,.8);
+  width: 60%;
+  padding: 3em;
+  margin: auto;
+  text-align: center;
+  margin-top: 20%;
+  color: white;
 }

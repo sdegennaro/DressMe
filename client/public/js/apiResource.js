@@ -66,6 +66,7 @@ function renderTodayInfo(object, parentElement){
   var weatherIcon = $('<img>').attr('src', object.weatherIconUrl[0].value);
   var weatherDesc = $('<p>').text("Weather description: " + object.weatherDesc[0].value);
   parentElement.append(tempP,humidityP, feelsLikeP, weatherDesc, weatherIcon);
+  console.log("Today's weather" + tempP);
   // ask Sam why this works lol
 };
 
