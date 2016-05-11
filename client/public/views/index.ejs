@@ -42,24 +42,30 @@
         </header>
 
         <div id='content-container' class="displayed">
-            <div id="weather-forecast">
-              <div id="morning-forecast">
-                <h3>Morning</h3>
-              </div>
-              <div id="midday-forecast">
-                <h3>Midday</h3>
-              </div>
-              <div id="evening-forecast">
-                <h3>Evening</h3>
-              </div>
-            </div>
-            <div id='rec-container'>
-              <div id="current-weather-container">
-                <h3>Today in [Insert City]</h3>
-              </div>
-              <div id="outfit-container">
+          <div class="ui grid">
+            <div class = "three wide column">
+              <div id="weather-forecast">
+                <div id="morning-forecast">
+                  <h3>Morning</h3>
+                </div>
+                <div id="midday-forecast">
+                  <h3>Midday</h3>
+                </div>
+                <div id="evening-forecast">
+                  <h3>Evening</h3>
+                </div>
               </div>
             </div>
+            <div class = "nine wide column">
+              <div id='rec-container'>
+                <div id="current-weather-container">
+                  <h3>Today in [Insert City]</h3>
+                </div>
+                <div id="outfit-container">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="account-container" class="hidden">
           <form id="account-form">
