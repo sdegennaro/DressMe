@@ -2,16 +2,19 @@ var recArray
 function getrecArray(){
   $.ajax({
     // Getting an error for url, not sure why this isnt found
-    url: '/api/recommendations/',
+
+    url: '/api/recommendations?degrees='+ lowTemp +'&rain=' + willRain + 'false&snow='+ willSnow 'false&gender=' + gender,
     type: 'GET',
     success: function(recommendations){
       console.log("got recommendation!");
+      console.log(recommendations);
       // returning all recs because logic isnt built in yet
-      recArray = recommendations.recommendation;
+//      recArray = recommendations.recommendation;
     }
   })
 }
 
+console.log("gender " + gender);
 
 function getType(tempNum, descriptionText){
   for (var i = 0; i < recArray.length; i++) {

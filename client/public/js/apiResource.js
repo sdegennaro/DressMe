@@ -4,6 +4,10 @@ var weatherKey;
 var baseURL;
 var queryURL;
 var userZipcode;
+var lowTemp = 0;
+var willRain = false;
+var willSnow = false;
+var gender = "male"; // needs to be updated on user signup
 
 function getKey(){
   $.ajax({
@@ -43,11 +47,17 @@ function askTheWeather(method, link, payload){
       getTodayInfo(data.data);
       checkForRain(data.data.weather[0].hourly);
       checkForSnow(data.data.weather[0].hourly);
+      getLowForToday(data.data.weather[0]);
     }
   });
 }
 
 var userInfoAPI = userInfoAPI || {};
+
+function getLowForToday(weather){
+  lowTemp = weather.mintempF;
+  console.log("low temp: " + lowTemp);
+};
 
 function getTodayInfo(object){
   var today = object.weather[0].hourly
@@ -61,28 +71,22 @@ function getTodayInfo(object){
 };
 
 function checkForRain(hourly){
-  var willRain = false;
   for (var i = 0; i<hourly.length; i ++){
     if ( hourly[i].chanceofrain > 40) {
       console.log(hourly[i].chanceofrain + "is greater than 40")
-      var willRain = true;
+      willRain = true;
     }
   }
-  console.log("Rain? " + willRain);
-  return willRain;
 }
 
 function checkForSnow(hourly){
-  var willSnow = false;
   console.log(hourly);
   for (var i = 0; i<hourly.length; i ++){
     if ( hourly[i].chanceofsnow > 10) {
       console.log(hourly[i].chanceofsnow + "is greater than 10")
-      var willSnow = true;
+      willSnow = true;
     }
   }
-  console.log("Snow? " + willSnow);
-  return willSnow;
 }
 
 function renderTodayInfo(object, parentElement){
