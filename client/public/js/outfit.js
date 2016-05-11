@@ -13,14 +13,14 @@ function getRec(){
 
 
 function renderOutfit(object){
-  $("#rec-container").empty();
+  $("#outfit-container").empty();
   console.log(object);
   var image = object.rec[0].outfit;
   var name = object.rec[0].name;
   console.log("Today's Recommendation: " + name);
   newDiv = $("<div>")
   newImg = $("<img src=" + image + ">")
-  $("#rec-container").append(newDiv, newImg)
+  $("#outfit-container").append(newDiv, newImg)
   newDiv.text(object.text);
 };
 
