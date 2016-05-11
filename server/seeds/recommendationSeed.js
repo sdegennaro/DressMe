@@ -362,8 +362,8 @@ var recommendationArray = [
       {
         name: "dafault",
         gender: "default",
-        rain: true,
-        snow: true,
+        rain: false,
+        snow: false,
         minTemp: -100,
         maxTemp: 100,
         outfit: "/images/mens/default.jpg",
