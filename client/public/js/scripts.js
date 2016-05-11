@@ -305,7 +305,7 @@ function updateHandler(){
               }
             })
           }
-        }s
+        }
       })
       switchDisplay($('#content-container'));
       switchDisplay($('#account-container'));

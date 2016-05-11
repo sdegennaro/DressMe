@@ -10,14 +10,23 @@ recRouter.get('/', function(req, res, next) {
   var snow = req.query.snow;
   var gender = req.query.gender;
 
-  res.json(req.query);
-// Logic goes here to find the correct recommendation based upon degrees and weather
-//  Recommendation.find({
+  console.log("T " + temp);
+  console.log("R " + rain);
+  console.log("S " + snow);
+  console.log("G " + gender);
 
-//  }, function (err, recResponse){
-//    res.json({recommendation: recResponse});
-//  })
+  Recommendation.find({
+    maxTemp : { $gte : temp },
+    minTemp : { $lte : temp },
+    rain : rain,
+    snow : snow,
+    gender: gender
+  }, function(err,response){
+    console.log("Response: " + response);
+    res.json({rec : response})
+  })
 })
+
 
 recRouter.post('/', function(req, res){
   var recommendation = new Recommendation(req.body.recommendation);

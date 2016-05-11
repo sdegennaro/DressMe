@@ -1,20 +1,20 @@
-var recArray
-function getrecArray(){
+function getRec(){
+  lowTemp = lowTemp + 1;
   $.ajax({
     // Getting an error for url, not sure why this isnt found
 
-    url: '/api/recommendations?degrees='+ lowTemp +'&rain=' + willRain + 'false&snow='+ willSnow 'false&gender=' + gender,
+    url: '/api/recommendations?degrees=' + lowTemp +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + gender,
     type: 'GET',
-    success: function(recommendations){
+    success: function(recommendation){
+      renderOutfit(recommendation);
       console.log("got recommendation!");
-      console.log(recommendations);
+
       // returning all recs because logic isnt built in yet
 //      recArray = recommendations.recommendation;
     }
   })
 }
 
-console.log("gender " + gender);
 
 function getType(tempNum, descriptionText){
   for (var i = 0; i < recArray.length; i++) {
@@ -25,14 +25,17 @@ function getType(tempNum, descriptionText){
   };
 };
 
-function renderType(object){
+function renderOutfit(object){
+  $("#rec-container").empty();
+  var image = object.rec[0].outfit;
+  console.log(image);
   newDiv = $("<div>")
-  newImg = $("<img src=" + object.url + ">")
+  newImg = $("<img src=" + image + ">")
   $("#rec-container").append(newDiv, newImg)
   newDiv.text(object.text);
 };
 
-
+// this should be on submit not on page load?
 $(function(){
-  getrecArray();
+  getRec();
 })

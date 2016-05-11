@@ -48,6 +48,7 @@ function askTheWeather(method, link, payload){
       checkForRain(data.data.weather[0].hourly);
       checkForSnow(data.data.weather[0].hourly);
       getLowForToday(data.data.weather[0]);
+      getRec();
     }
   });
 }
@@ -55,7 +56,8 @@ function askTheWeather(method, link, payload){
 var userInfoAPI = userInfoAPI || {};
 
 function getLowForToday(weather){
-  lowTemp = weather.mintempF;
+  var temp = weather.mintempF;
+  lowTemp = parseInt(temp);
   console.log("low temp: " + lowTemp);
 };
 
@@ -80,7 +82,6 @@ function checkForRain(hourly){
 }
 
 function checkForSnow(hourly){
-  console.log(hourly);
   for (var i = 0; i<hourly.length; i ++){
     if ( hourly[i].chanceofsnow > 10) {
       console.log(hourly[i].chanceofsnow + "is greater than 10")
