@@ -5,13 +5,18 @@ var express           = require('express'),
 // Create a new user
 
 recRouter.get('/', function(req, res, next) {
-  var degrees = req.query.degrees;
-  var weather = req.query.description;
+  var temp = req.query.degrees;
+  var rain = req.query.rain;
+  var snow = req.query.snow;
+  var gender = req.query.gender;
 
+  res.json(req.query);
 // Logic goes here to find the correct recommendation based upon degrees and weather
-  Recommendation.find({}, function (err, recResponse){
-    res.json({recommendation: recResponse});
-  })
+//  Recommendation.find({
+
+//  }, function (err, recResponse){
+//    res.json({recommendation: recResponse});
+//  })
 })
 
 recRouter.post('/', function(req, res){
