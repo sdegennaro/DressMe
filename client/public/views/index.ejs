@@ -107,7 +107,7 @@
           <form id="sign-up-form" style="color:white;" class="hidden">
             <h1>Dress Me</h1>
             <div class="form-group hidden" id='signup-step-1'>
-              <h3>Zipcode?</h3>
+              <h5>ENTER ZIPCODE</h5>
               <input type="number" name="zipcode" value="" placeholder="5 Digit Zipcode">
               <br>
               <button type="button" name="button-1">Next</button>
@@ -116,28 +116,29 @@
               </div>
             </div>
             <div class="form-group hidden" id='signup-step-2'>
-              <h3>Gender?</h3>
-              <input type="radio" name="gender" value="Male" >Male
-              <input type="radio" name="gender" value="Female" checked >Female
+              <h5>ENTER GENDER</h5>
+              <input type="radio" name="gender" value="male" >Male
+              <input type="radio" name="gender" value="female" checked >Female
               <br>
               <button type="button" name="button-2">Next</button>
             </div>
             <div class="form-group hidden" id='signup-step-3'>
-              <h3>How do you feel?</h3>
-              <input type="radio" name="temp_pref" value="Hot" >I am always hot
+              <h5>TELL ME ABOUT YOURSELF.</h5>
+              <input type="radio" name="temp_pref" value="Hot" >I'm always hot
               <input type="radio" name="temp_pref" value="Ok" checked >I'm usually ok
-              <input type="radio" name="temp_pref" value="Cold" >I am always cold
+              <input type="radio" name="temp_pref" value="Cold" >I'm always cold
               <br>
               <button type="button" name="button-3">Next</button>
             </div>
             <div class="form-group hidden" id='signup-step-4'>
-              <h3>Can we text you?</h3>
-              <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">Text opt in?
+              <h6>GET YOUR WEATHER AND WARDROBE RECEOMMENDATIONS TO YOUR PHONE EVERY MORNING!</h6>
+              <input type="radio" name="text_opt_in" value="1" checked >Yes, I want this!
+              <input type="radio" name="text_opt_in" value="0" >No thank you.
               <br>
               <button type="button" name="button-4">Next</button>
             </div>
             <div class="form-group hidden" id='signup-step-5'>
-              <h3>Create your account!</h3>
+              <h5>Create your account:</h5>
               <input type="number" name="username" value="" placeholder="Username">
               <br>
               <input type="password" name="password" value="" placeholder="Password">
