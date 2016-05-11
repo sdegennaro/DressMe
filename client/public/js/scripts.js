@@ -394,6 +394,14 @@ function getSMSContacts(){
   })
 }
 
+function setSignupStep1Button(){
+  if(zipcode.length !== 5) {
+    return auth.showAlert("Zipcode isn't 5 characters");
+  }
+
+}
+
+
 $(function(){
   var landingCTAbutton = $("#landing-cta-button");
   var landingContainer = $("#landing-container");
