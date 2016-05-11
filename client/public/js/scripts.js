@@ -411,13 +411,25 @@ $(function(){
   var accountLink = $('#account-link');
   var accountContainer = $('#account-container');
   var contentContainer = $("#content-container")
+  var signupStep1 = $("#signup-step-1");
+  var signupStep2 = $("#signup-step-2");
+  var signupStep3 = $("#signup-step-3");
+  var signupStep4 = $("#signup-step-4");
+  var signupStep5 = $("#signup-step-5");
+  var signupButton1 = signupForm.find("[name=button-1]")
+  var signupButton2 = signupForm.find("[name=button-2]")
+  var signupButton3 = signupForm.find("[name=button-3]")
+  var signupButton4 = signupForm.find("[name=button-4]")
   // auth.checkLoggedInStatus();
   auth.bindLoginForm();
   auth.bindSignUpForm();
   auth.bindSwitchFormLinks();
   auth.bindLogoutLink();
-  switchClickHandler(landingCTAbutton, landingContainer, signupForm);
-  switchClickHandler(landingLoginLink, landingContainer, loginForm);
+  switchClickHandler(landingCTAbutton, landingContainer, signupForm, signupStep1);
+  switchClickHandler(signupButton1, signupStep1, signupStep2);
+  switchClickHandler(signupButton2, signupStep2, signupStep3);
+  switchClickHandler(signupButton3, signupStep3, signupStep4);
+  switchClickHandler(signupButton4, signupStep4, signupStep5);  switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
   deleteHandler();
   updateHandler();
