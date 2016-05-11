@@ -176,6 +176,8 @@ auth.submitSignUpForm = function(){
   var password = $form.find('[name=password]').val();
   var confirm  = $form.find('[name=password_confirm]').val();
   var zipcode = $form.find("[name=zipcode]").val();
+  var gender = $form.find("[name=gender]").val();
+  console.log(gender);
   var temp_pref = $form.find("[name=temp_pref]").val();
   var is_admin = $form.find("[name=is_admin]").val();
   var text_opt_in = $form.find("[name=text_opt_in]").val();
@@ -203,8 +205,8 @@ auth.submitSignUpForm = function(){
       zipcode: zipcode,
       temp_pref: temp_pref,
       is_admin: is_admin,
-      text_opt_in: text_opt_in
-
+      text_opt_in: text_opt_in,
+      gender: gender
     }
   };
 
@@ -270,7 +272,8 @@ function updateHandler(){
     var temp_pref = $("#account-container").find("[name=temp_pref]").val();
     var is_admin = $("#account-container").find("[name=is_admin]").val();
     var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
-    var id
+    var gender = $("#account-container").find("[name=gender]").val();
+    console.log(gender);
 
     auth.users.getAll()
       .done(function(users){
@@ -285,7 +288,8 @@ function updateHandler(){
                 zipcode: zipcode,
                 temp_pref: temp_pref,
                 is_admin: is_admin,
-                text_opt_in: text_opt_in
+                text_opt_in: text_opt_in,
+                gender: gender
               },
               success: function(data){
                 console.log(data);

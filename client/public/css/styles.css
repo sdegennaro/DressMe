@@ -12,7 +12,8 @@ body{
 }
 
 h1 {
-  color: yellow;
+  color: #ffd614;
+  font-family: 'Architects Daughter', cursive;
 }
 
 #content-container {
@@ -61,7 +62,6 @@ h1 {
 
 #logged-in-container {
   z-index: 1;
-  background-color: white;
   text-align: center;
 }
 
