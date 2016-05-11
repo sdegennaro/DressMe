@@ -101,6 +101,7 @@ auth.users = {
 }
 
 function renderAccountInfo(userObject){
+
   $("#account-container").find("[name=username]").val(userObject.username);
   $("#account-container").find("[name=zipcode]").val(userObject.zipcode);
   $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
@@ -300,14 +301,23 @@ function updateHandler(){
                 is_admin: is_admin,
                 text_opt_in: text_opt_in
               },
-              success: function(){
-                console.log('updated!');
+              success: function(data){
+                console.log(data);
+                $('#morning-forecast').find('p').remove();
+                $('#morning-forecast').find('img').remove();
+                $("#midday-forecast").find('p').remove();
+                $("#midday-forecast").find('img').remove();
+                $("#evening-forecast").find('p').remove();
+                $("#evening-forecast").find('img').remove();
+                $('#rec-container').find('img').remove();
+                makeQueryLink(userZipcode,"json",2);
+                askTheWeather("GET", queryURL);
               }
             })
           }
         }
       })
-      getRec()
+      getRec();
       switchDisplay($('#content-container'));
       switchDisplay($('#account-container'));
   })
@@ -316,12 +326,20 @@ function updateHandler(){
 
 function accountLinkHandler(){
   var accountLink = $("#account-link");
+  var updateButton = $('#update-button');
   accountLink.on('click',function(){
     if(accountLink.text() == "My Account"){
       accountLink.text("My Forecast")
     } else{
       accountLink.text("My Account")
     };
+  updateButton.on('click', function(){
+    if(accountLink.text() == 'My Account'){
+      accountLink.text('My Forecast')
+    } else {
+      accountLink.text("My Account")
+    }
+  })
   })
 }
 
