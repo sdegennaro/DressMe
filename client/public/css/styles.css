@@ -63,10 +63,15 @@ h1 {
 #logged-in-container {
   z-index: 1;
   text-align: center;
+  background-color: rgba(255, 255, 255,.9);
+  padding-top: 3%;
+  margin: -1%;
 }
 
+
+
 #logged-in {
-  margin-bottom: 6%;
+  margin-bottom: 2%;
 }
 
 #weather-forecast {
@@ -107,10 +112,16 @@ h5 {
   margin: 0;
   padding: 0;
   font-size: 18px;
+  color: white;
 }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+a {
+  font-size: 18px;
+  text-decoration: none;
 }
