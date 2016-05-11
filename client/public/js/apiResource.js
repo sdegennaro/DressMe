@@ -29,7 +29,7 @@ function getUserZipcode(){
 }
 
 function makeBaseLink(keyString){
-  baseURL = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key="+ keyString
+  baseURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key="+ keyString
 };
 
 
@@ -69,7 +69,6 @@ function getTodayInfo(object){
   renderTodayInfo(morning,$("#morning-forecast"))
   renderTodayInfo(midday,$("#midday-forecast"))
   renderTodayInfo(evening,$("#evening-forecast"))
-  // renderTodayInfo(morningIcon,$('#morning-forecast'))
 };
 
 function checkForRain(hourly){

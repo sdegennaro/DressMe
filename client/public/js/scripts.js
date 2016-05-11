@@ -307,7 +307,7 @@ function updateHandler(){
           }
         }
       })
-      getRec()
+      getRec();
       switchDisplay($('#content-container'));
       switchDisplay($('#account-container'));
   })
@@ -316,12 +316,20 @@ function updateHandler(){
 
 function accountLinkHandler(){
   var accountLink = $("#account-link");
+  var updateButton = $('#update-button');
   accountLink.on('click',function(){
     if(accountLink.text() == "My Account"){
       accountLink.text("My Forecast")
     } else{
       accountLink.text("My Account")
     };
+  updateButton.on('click', function(){
+    if(accountLink.text() == 'My Account'){
+      accountLink.text('My Forecast')
+    } else {
+      accountLink.text("My Account")
+    }
+  })
   })
 }
 
