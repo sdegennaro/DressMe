@@ -7,7 +7,7 @@ var userZipcode;
 var lowTemp = 0;
 var willRain = false;
 var willSnow = false;
-var gender = "male"; // needs to be updated on user signup
+var gender = "default"; // needs to be updated on user signup
 
 function getKey(){
   $.ajax({
@@ -94,7 +94,8 @@ function checkForSnow(hourly){
 }
 
 function renderTodayInfo(object, parentElement){
-  console.log ("rendering todays weather");
+  parentElement.remove('p');
+  parentElement.remove('img');
   var tempP = $("<p>").text("Temp: "+ object.tempF + " °F");
 //  var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
 //  var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF + " °F");
@@ -105,7 +106,7 @@ function renderTodayInfo(object, parentElement){
 };
 
 function renderCurrentInfo(object){
-  console.log ("rendering current weather");
+  $("#current-weather-container").remove('p');
   var currentCondition = $("<p>").text("Temp: "+ object.temp_F + " °F  |  Humidity: "+ object.humidity + "%  |  Feels Like: "+ object.FeelsLikeF + " °F"  );
   var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
   var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF + " °F");
