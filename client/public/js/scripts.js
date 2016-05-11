@@ -189,10 +189,6 @@ auth.submitSignUpForm = function(){
     return auth.showAlert("Username isn't 10 characters");
   }
 
-  if(zipcode.length !== 5) {
-    return auth.showAlert("Zipcode isn't 5 characters");
-  }
-
   var payload = {
     user: {
       username: username,
@@ -373,6 +369,12 @@ function getSMSContacts(){
   })
 }
 
+function setSignupStep1Button(){
+  if(zipcode.length !== 5) {
+    return auth.showAlert("Zipcode isn't 5 characters");
+  }
+  
+}
 
 $(function(){
   // set DOM variables
