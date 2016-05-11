@@ -2,8 +2,6 @@ console.log('loaded...');
 
 var auth = auth || {};
 
-
-
 auth.bindLoginForm = function(){
   $("#login-form").on("submit", function(e){
     e.preventDefault();
@@ -100,6 +98,7 @@ auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
 
       switchDisplay($("#sign-up-form"));
+      switchDisplay($("#signup-step-1"));
       switchDisplay($("#login-form"));
   });
 };
@@ -371,7 +370,6 @@ $(function(){
   var signupButton2 = signupForm.find("[name=button-2]")
   var signupButton3 = signupForm.find("[name=button-3]")
   var signupButton4 = signupForm.find("[name=button-4]")
-
   var landingLoginLink = $("#landing-login-link");
   var loginForm = $("#login-form");
   var accountLink = $('#account-link');
@@ -388,10 +386,6 @@ $(function(){
   switchClickHandler(signupButton2, signupStep2, signupStep3);
   switchClickHandler(signupButton3, signupStep3, signupStep4);
   switchClickHandler(signupButton4, signupStep4, signupStep5);
-  testButton(signupButton4);
-  console.log(signupButton4);
-  // switchClickHandler(landingCTAbutton, landingContainer, signupForm, signupStep1);
-
 // change display from landing page to login form with login button click
   switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
