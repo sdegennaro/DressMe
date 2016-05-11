@@ -332,18 +332,17 @@ function accountLinkHandler(){
   var accountLink = $("#account-link");
   var updateButton = $('#update-button');
   accountLink.on('click',function(){
-    if(accountLink.text() == "My Account"){
+    if(accountLink.text() === "My Account") {
       accountLink.text("My Forecast")
-    } else{
-      accountLink.text("My Account")
-    };
-  updateButton.on('click', function(){
-    if(accountLink.text() == 'My Account'){
-      accountLink.text('My Forecast')
-    } else {
+    }
+    else {
       accountLink.text("My Account")
     }
   })
+  updateButton.on('click', function(){
+    if(accountLink.text() === 'My Forecast') {
+      accountLink.text('My Account')
+    }
   })
 }
 
@@ -434,5 +433,4 @@ $(function(){
   deleteHandler();
   updateHandler();
   accountLinkHandler();
-
 });
