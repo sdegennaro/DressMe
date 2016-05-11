@@ -370,10 +370,12 @@ var recommendationArray = [
         text: "No recommendation, yet!"
       }
   ]
+var dotEnv          = require('dotenv').config(),
+    express         = require('express'),
+    morgan          = require('morgan')
+var mongoose        = require('mongoose');
 
-  var mongoose = require('mongoose');
-
-  mongoose.connect('mongodb://localhost/dressme_app', function() {
+  mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/dressme_app', function() {
 
   });
 
