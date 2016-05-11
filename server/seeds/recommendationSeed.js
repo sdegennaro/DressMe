@@ -126,7 +126,7 @@ var recommendationArray = [
         snow: false,
         minTemp: 35,
         maxTemp: 49.99,
-        outfit "/images/mens/men-13.jpg",
+        outfit: "/images/mens/men-13.jpg",
         text: "Hey Dude! It's raining like cats and dogs. Don't forget your umbrella."
       },
       {
