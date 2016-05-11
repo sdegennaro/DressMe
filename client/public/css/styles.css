@@ -16,6 +16,7 @@ h1 {
 }
 
 #content-container {
+  border: solid black;
 
 }
 
@@ -36,10 +37,8 @@ h1 {
   margin: auto;
   text-align: center;
   margin-top: 10%;
-<<<<<<< HEAD
-=======
   color: black;
->>>>>>> 1f4438dcd6c3545642f85fbc68cb5a790102f4f7
+
 }
 
 #login-form {
@@ -87,4 +86,9 @@ input {
 button {
   color: black;
   margin: .5em;
+}
+
+img {
+    width: 100%;
+    height: auto;
 }
