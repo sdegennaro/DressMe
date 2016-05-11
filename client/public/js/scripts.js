@@ -2,6 +2,24 @@ console.log('loaded...');
 
 var auth = auth || {};
 
+function switchDisplay(DOMelement){
+  DOMelement.toggleClass('hidden');
+  DOMelement.toggleClass('displayed');
+};
+
+function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMelement){
+  clickElement.on('click', function(){
+    switchDisplay(DOMelement);
+    if(secondDOMelement){
+      switchDisplay(secondDOMelement);
+    };
+    if(thirdDOMelement){
+      switchDisplay(thirdDOMelement);
+    };
+
+  });
+};
+
 auth.bindLoginForm = function(){
   $("#login-form").on("submit", function(e){
     e.preventDefault();
@@ -99,7 +117,6 @@ auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
 
       switchDisplay($("#sign-up-form"));
-      switchDisplay($("#signup-step-1"));
       switchDisplay($("#login-form"));
   });
 };
@@ -191,6 +208,10 @@ auth.submitSignUpForm = function(){
 
   if(zipcode.length !== 5) {
     return auth.showAlert("Zipcode isn't 5 characters");
+  }
+
+  if(+zipcode == NaN) {
+    return auth.showAlert("Zipcode is invaild");
   }
 
   var payload = {
@@ -311,18 +332,17 @@ function accountLinkHandler(){
   var accountLink = $("#account-link");
   var updateButton = $('#update-button');
   accountLink.on('click',function(){
-    if(accountLink.text() == "My Account"){
+    if(accountLink.text() === "My Account") {
       accountLink.text("My Forecast")
-    } else{
-      accountLink.text("My Account")
-    };
-  updateButton.on('click', function(){
-    if(accountLink.text() == 'My Account'){
-      accountLink.text('My Forecast')
-    } else {
+    }
+    else {
       accountLink.text("My Account")
     }
   })
+  updateButton.on('click', function(){
+    if(accountLink.text() === 'My Forecast') {
+      accountLink.text('My Account')
+    }
   })
 }
 
@@ -373,12 +393,23 @@ function getSMSContacts(){
   })
 }
 
+function setSignupStep1Button(){
+  if(zipcode.length !== 5) {
+    return auth.showAlert("Zipcode isn't 5 characters");
+  }
+
+}
+
 
 $(function(){
-  // set DOM variables
   var landingCTAbutton = $("#landing-cta-button");
   var landingContainer = $("#landing-container");
   var signupForm = $("#sign-up-form");
+  var landingLoginLink = $("#landing-login-link");
+  var loginForm = $("#login-form");
+  var accountLink = $('#account-link');
+  var accountContainer = $('#account-container');
+  var contentContainer = $("#content-container")
   var signupStep1 = $("#signup-step-1");
   var signupStep2 = $("#signup-step-2");
   var signupStep3 = $("#signup-step-3");
@@ -388,27 +419,18 @@ $(function(){
   var signupButton2 = signupForm.find("[name=button-2]")
   var signupButton3 = signupForm.find("[name=button-3]")
   var signupButton4 = signupForm.find("[name=button-4]")
-  var landingLoginLink = $("#landing-login-link");
-  var loginForm = $("#login-form");
-  var accountLink = $('#account-link');
-  var accountContainer = $('#account-container');
-  var contentContainer = $("#content-container")
   // auth.checkLoggedInStatus();
   auth.bindLoginForm();
   auth.bindSignUpForm();
   auth.bindSwitchFormLinks();
   auth.bindLogoutLink();
-  // change display from landing page to sign-up form with sign up button click
   switchClickHandler(landingCTAbutton, landingContainer, signupForm, signupStep1);
   switchClickHandler(signupButton1, signupStep1, signupStep2);
   switchClickHandler(signupButton2, signupStep2, signupStep3);
   switchClickHandler(signupButton3, signupStep3, signupStep4);
-  switchClickHandler(signupButton4, signupStep4, signupStep5);
-// change display from landing page to login form with login button click
-  switchClickHandler(landingLoginLink, landingContainer, loginForm);
+  switchClickHandler(signupButton4, signupStep4, signupStep5);  switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
   deleteHandler();
   updateHandler();
   accountLinkHandler();
-
 });

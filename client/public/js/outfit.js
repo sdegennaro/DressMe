@@ -1,5 +1,8 @@
 function getRec(){
-  lowTemp = lowTemp;
+  console.log("temp: " + lowTemp);
+  console.log("rain: " + willRain);
+  console.log("snow: " + willSnow);
+  console.log("gender: " + gender);
   $.ajax({
     url: '/api/recommendations?degrees=' + lowTemp +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + gender,
     type: 'GET',
