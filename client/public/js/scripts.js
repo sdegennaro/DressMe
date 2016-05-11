@@ -2,23 +2,7 @@ console.log('loaded...');
 
 var auth = auth || {};
 
-function switchDisplay(DOMelement){
-  DOMelement.toggleClass('hidden');
-  DOMelement.toggleClass('displayed');
-};
 
-function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMelement){
-  clickElement.on('click', function(){
-    switchDisplay(DOMelement);
-    if(secondDOMelement){
-      switchDisplay(secondDOMelement);
-    };
-    if(thirdDOMelement){
-      switchDisplay(thirdDOMelement);
-    };
-
-  });
-};
 
 auth.bindLoginForm = function(){
   $("#login-form").on("submit", function(e){
@@ -372,10 +356,22 @@ function getSMSContacts(){
   })
 }
 
+
 $(function(){
+  // set DOM variables
   var landingCTAbutton = $("#landing-cta-button");
   var landingContainer = $("#landing-container");
   var signupForm = $("#sign-up-form");
+  var signupStep1 = $("#signup-step-1");
+  var signupStep2 = $("#signup-step-2");
+  var signupStep3 = $("#signup-step-3");
+  var signupStep4 = $("#signup-step-4");
+  var signupStep5 = $("#signup-step-5");
+  var signupButton1 = signupForm.find("[name=button-1]")
+  var signupButton2 = signupForm.find("[name=button-2]")
+  var signupButton3 = signupForm.find("[name=button-3]")
+  var signupButton4 = signupForm.find("[name=button-4]")
+
   var landingLoginLink = $("#landing-login-link");
   var loginForm = $("#login-form");
   var accountLink = $('#account-link');
@@ -386,7 +382,17 @@ $(function(){
   auth.bindSignUpForm();
   auth.bindSwitchFormLinks();
   auth.bindLogoutLink();
-  switchClickHandler(landingCTAbutton, landingContainer, signupForm);
+  // change display from landing page to sign-up form with sign up button click
+  switchClickHandler(landingCTAbutton, landingContainer, signupForm, signupStep1);
+  switchClickHandler(signupButton1, signupStep1, signupStep2);
+  switchClickHandler(signupButton2, signupStep2, signupStep3);
+  switchClickHandler(signupButton3, signupStep3, signupStep4);
+  switchClickHandler(signupButton4, signupStep4, signupStep5);
+  testButton(signupButton4);
+  console.log(signupButton4);
+  // switchClickHandler(landingCTAbutton, landingContainer, signupForm, signupStep1);
+
+// change display from landing page to login form with login button click
   switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
   deleteHandler();
