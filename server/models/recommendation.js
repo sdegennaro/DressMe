@@ -2,11 +2,12 @@ var mongoose = require('mongoose');
 
 var recSchema = mongoose.Schema({
     name: String,
-    description: String,
     gender: String,
+    rain: Boolean,
+    snow: Boolean,
     minTemp: Number,
     maxTemp: Number,
-    url: String,
+    outfit: String,
     text: String
 });
 

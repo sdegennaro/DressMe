@@ -4,6 +4,10 @@ var weatherKey;
 var baseURL;
 var queryURL;
 var userZipcode;
+var lowTemp = 0;
+var willRain = false;
+var willSnow = false;
+var gender = "male"; // needs to be updated on user signup
 
 function getKey(){
   $.ajax({
@@ -41,11 +45,21 @@ function askTheWeather(method, link, payload){
     url: link,
     success: function(data){
       getTodayInfo(data.data);
+      checkForRain(data.data.weather[0].hourly);
+      checkForSnow(data.data.weather[0].hourly);
+      getLowForToday(data.data.weather[0]);
+      getRec();
     }
   });
 }
 
 var userInfoAPI = userInfoAPI || {};
+
+function getLowForToday(weather){
+  var temp = weather.mintempF;
+  lowTemp = parseInt(temp);
+  console.log("low temp: " + lowTemp);
+};
 
 function getTodayInfo(object){
   var today = object.weather[0].hourly
@@ -58,6 +72,24 @@ function getTodayInfo(object){
   // renderTodayInfo(morningIcon,$('#morning-forecast'))
 };
 
+function checkForRain(hourly){
+  for (var i = 0; i<hourly.length; i ++){
+    if ( hourly[i].chanceofrain > 40) {
+      console.log(hourly[i].chanceofrain + "is greater than 40")
+      willRain = true;
+    }
+  }
+}
+
+function checkForSnow(hourly){
+  for (var i = 0; i<hourly.length; i ++){
+    if ( hourly[i].chanceofsnow > 10) {
+      console.log(hourly[i].chanceofsnow + "is greater than 10")
+      willSnow = true;
+    }
+  }
+}
+
 function renderTodayInfo(object, parentElement){
 
   var tempP = $("<p>").text("Temp: "+ object.tempF + " °F");
@@ -66,7 +98,6 @@ function renderTodayInfo(object, parentElement){
   var weatherIcon = $('<img>').attr('src', object.weatherIconUrl[0].value);
   var weatherDesc = $('<p>').text("Weather description: " + object.weatherDesc[0].value);
   parentElement.append(tempP,humidityP, feelsLikeP, weatherDesc, weatherIcon);
-  console.log("Today's weather" + tempP);
   // ask Sam why this works lol
 };
 

@@ -36,6 +36,10 @@ h1 {
   margin: auto;
   text-align: center;
   margin-top: 10%;
+<<<<<<< HEAD
+=======
+  color: black;
+>>>>>>> 1f4438dcd6c3545642f85fbc68cb5a790102f4f7
 }
 
 #login-form {
@@ -45,6 +49,7 @@ h1 {
   margin: auto;
   text-align: center;
   margin-top: 10%;
+  color: black;
 }
 
 #account-container {
