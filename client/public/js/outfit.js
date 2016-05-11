@@ -6,6 +6,7 @@ function getRec(){
     success: function(recommendation){
       renderOutfit(recommendation);
       console.log("got recommendation!");
+      askTheWeather();
     }
   })
 }

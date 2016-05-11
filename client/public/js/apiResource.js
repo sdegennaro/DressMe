@@ -29,7 +29,7 @@ function getUserZipcode(){
 }
 
 function makeBaseLink(keyString){
-  baseURL = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key="+ keyString
+  baseURL = "https://api.worldweatheronline.com/premium/v1/weather.ashx?key="+ keyString
 };
 
 
@@ -72,7 +72,7 @@ function getTodayInfo(object){
   renderTodayInfo(midday,$("#midday-forecast"))
   renderTodayInfo(evening,$("#evening-forecast"))
   renderCurrentInfo(current)
-  // renderTodayInfo(morningIcon,$('#morning-forecast'))
+
 };
 
 function checkForRain(hourly){
@@ -114,45 +114,6 @@ function renderCurrentInfo(object){
   // ask Sam why this works lol
 };
 
-// function renderCurrentInfo(object){
-//   var current = object.current_condition[0]
-//   console.log(current.temp_F);
-// };
-
-// auth.renderUserInfo = function() {
-//
-//   How can I get info from the user from the mongo database?
-//
-//   var query = $('#input').val();
-//   var key = '&key=3436ce55a40c41fc8ef154950160605';
-//   var format = '&format=json';
-//   $.getJSON('http://api.worldweatheronline.com/premium/v1/weather.ashx?q=' + query + format + key, function(data){
-//
-//   }
-//
-// };
-
-//
-// userInfoAPI.get = function() {
-//   return makeAjaxCall('get', '/api/users');
-// }
-//
-// // POST request to /
-// userInfoAPI.post = function( user ) {
-//   return makeAjaxCall('post','/api/users', puppy);
-// }
-//
-// // PUT request to /:id
-// userInfoAPI.update = function( userId, changes ) {
-//   var url = '/api/users/' + userId;
-//   return makeAjaxCall('put', url, changes);
-// }
-//
-// // DELETE request to /:id
-// userInfoAPI.remove = function( userId ) {
-//   var url = '/api/users/' + userId;
-//   return makeAjaxCall('delete', url);
-// }
 
 $(function(){
   getKey();

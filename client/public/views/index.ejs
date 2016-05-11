@@ -9,6 +9,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.1/js.cookie.min.js" charset="utf-8"></script>
+    <script src="/js/otherscripts.js" charset="utf-8"></script>
     <script src="/js/text.js" charset="utf-8"></script>
     <script src="/js/apiResource.js" charset="utf-8"></script>
     <script src="/js/outfit.js" charset="utf-8"></script>
@@ -73,7 +74,6 @@
               <input type="number" name="username" value="" placeholder="Username">
               <input type="number" name="zipcode" value="" placeholder="Zipcode">
               <input type="text" name="temp_pref" value="" placeholder="Temperature Preference">
-              <input type="number" name="is_admin" value="" placeholder="Admin?">
               <input type="number" name="text_opt_in" value="" placeholder="Text?">
             </div>
             <button id="update-button" type="submit" name="button">Update</button>
@@ -99,28 +99,50 @@
           </form>
 
           <!-- Sign up -->
-          <form id="sign-up-form" class="hidden">
+          <form id="sign-up-form" style="color:white;" class="hidden">
             <h1>Dress Me</h1>
-            <div class="form-group">
+            <div class="form-group hidden" id='signup-step-1'>
+              <h3>Zipcode?</h3>
+              <input type="number" name="zipcode" value="" placeholder="5 Digit Zipcode">
+              <br>
+              <button type="button" name="button-1">Next</button>
+              <div class="form-group">
+                <a href="#" id="login-link">Already have an account? click here</a>
+              </div>
+            </div>
+            <div class="form-group hidden" id='signup-step-2'>
+              <h3>Gender?</h3>
+              <input type="radio" name="gender" value="Male" >Male
+              <input type="radio" name="gender" value="Female" checked >Female
+              <br>
+              <button type="button" name="button-2">Next</button>
+            </div>
+            <div class="form-group hidden" id='signup-step-3'>
+              <h3>How do you feel?</h3>
+              <input type="radio" name="temp_pref" value="Hot" >I am always hot
+              <input type="radio" name="temp_pref" value="Ok" checked >I'm usually ok
+              <input type="radio" name="temp_pref" value="Cold" >I am always cold
+              <br>
+              <button type="button" name="button-3">Next</button>
+            </div>
+            <div class="form-group hidden" id='signup-step-4'>
+              <h3>Can we text you?</h3>
+              <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">Text opt in?
+              <br>
+              <button type="button" name="button-4">Next</button>
+            </div>
+            <div class="form-group hidden" id='signup-step-5'>
+              <h3>Create your account!</h3>
               <input type="number" name="username" value="" placeholder="Username">
               <br>
-              <input type="number" name="zipcode" value="" placeholder="Zipcode">
-              <br>
-              <input type="text" name="temp_pref" value="" placeholder="Temperature Preference">
-              <br>
-              <input type="number" name="is_admin" value="" placeholder="Admin?">
-              <br>
-              <input type="number" name="text_opt_in" value="" placeholder="Text?">
-              <br>
-<!-- <input type="text" name="email" value="" placeholder="email"> -->
               <input type="password" name="password" value="" placeholder="Password">
               <br>
               <input type="password" name="password_confirm" value="" placeholder="Password Confirm">
+              <br>
+              <button type="submit" class="btn btn-default" name="button2">Complete Sign Up</button>
             </div>
-            <button type="submit" class="btn btn-default" name="button">Sign up</button>
-            <div class="form-group">
-              <a href="#" id="login-link">Already have an account? click here</a>
-            </div>
+
+
           </form>
 
           <!-- Items Form -->
