@@ -62,13 +62,16 @@ function getLowForToday(weather){
 };
 
 function getTodayInfo(object){
+  console.log(object);
   var today = object.weather[0].hourly
   var morning = today[2]
   var midday = today[4]
   var evening = today[5]
+  var current = object.current_condition[0];
   renderTodayInfo(morning,$("#morning-forecast"))
   renderTodayInfo(midday,$("#midday-forecast"))
   renderTodayInfo(evening,$("#evening-forecast"))
+  renderCurrentInfo(current)
   // renderTodayInfo(morningIcon,$('#morning-forecast'))
 };
 
@@ -91,13 +94,23 @@ function checkForSnow(hourly){
 }
 
 function renderTodayInfo(object, parentElement){
-
+  console.log ("rendering todays weather");
   var tempP = $("<p>").text("Temp: "+ object.tempF + " °F");
+//  var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
+//  var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF + " °F");
+  var weatherIcon = $('<img>').attr('src', object.weatherIconUrl[0].value);
+//  var weatherDesc = $('<p>').text("Weather description: " + object.weatherDesc[0].value);
+  parentElement.append(tempP, weatherIcon);
+  // ask Sam why this works lol
+};
+
+function renderCurrentInfo(object){
+  console.log ("rendering current weather");
+  var currentCondition = $("<p>").text("Temp: "+ object.temp_F + " °F  |  Humidity: "+ object.humidity + "%  |  Feels Like: "+ object.FeelsLikeF + " °F"  );
   var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
   var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF + " °F");
-  var weatherIcon = $('<img>').attr('src', object.weatherIconUrl[0].value);
-  var weatherDesc = $('<p>').text("Weather description: " + object.weatherDesc[0].value);
-  parentElement.append(tempP,humidityP, feelsLikeP, weatherDesc, weatherIcon);
+//  var weatherIcon = $('<img>').attr('src', object.weatherIconUrl[0].value);
+  $("#current-weather-container").append(currentCondition);
   // ask Sam why this works lol
 };
 

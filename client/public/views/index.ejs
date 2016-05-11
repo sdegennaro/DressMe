@@ -4,11 +4,10 @@
     <meta charset="utf-8">
     <title> DressMe </title>
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.7/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
     <link rel="stylesheet" href="/css/styles.css">
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.7/components/accordion.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.1/js.cookie.min.js" charset="utf-8"></script>
     <script src="/js/text.js" charset="utf-8"></script>
     <script src="/js/apiResource.js" charset="utf-8"></script>
@@ -41,26 +40,28 @@
         </header>
 
         <div id='content-container' class="displayed">
-          <div class="ui grid">
-            <div class = "three wide column">
-              <div id="weather-forecast">
-                <div id="morning-forecast">
-                  <h3>Morning</h3>
-                </div>
-                <div id="midday-forecast">
-                  <h3>Midday</h3>
-                </div>
-                <div id="evening-forecast">
-                  <h3>Evening</h3>
+          <div class="container">
+            <div class="row">
+              <div class = "six columns">
+                <div id="weather-forecast">
+                  <div id="morning-forecast">
+                    <h4>Morning</h4>
+                  </div>
+                  <div id="midday-forecast">
+                    <h4>Midday</h4>
+                  </div>
+                  <div id="evening-forecast">
+                    <h4>Evening</h4>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class = "nine wide column">
-              <div id='rec-container'>
-                <div id="current-weather-container">
-                  <h3>Today in [Insert City]</h3>
-                </div>
-                <div id="outfit-container">
+              <div class = "five columns">
+                <div id='rec-container'>
+                  <div id="current-weather-container">
+                    <h3>Today in [Insert City]</h3>
+                  </div>
+                  <div id="outfit-container">
+                  </div>
                 </div>
               </div>
             </div>
