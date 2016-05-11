@@ -7,7 +7,7 @@ var crypto = require('crypto');
 var UserSchema = mongoose.Schema({
   username: {type: Number, required: true},
   password: {type: String},
-  zipcode: {type: Number, required: true},
+  zipcode: {type: String, required: true},
   temp_pref: {type: String, required: true},
   is_admin: {type: Number, default: 0},
   text_opt_in: {type: Number, default: 0}
