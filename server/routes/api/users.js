@@ -39,8 +39,8 @@ usersRouter.get('/me', function(req, res, next) {
 usersRouter.put('/:id', function(req, res, next) {
   console.log('updating!');
   var id = req.params.id;
-  User.findByIdAndUpdate(id, req.body , { new: true }, function(err, puppy) {
-    res.json(puppy);
+  User.findByIdAndUpdate(id, req.body , { new: true }, function(err, user) {
+    res.json(user);
   });
 });
 
