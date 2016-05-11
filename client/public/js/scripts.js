@@ -2,24 +2,6 @@ console.log('loaded...');
 
 var auth = auth || {};
 
-function switchDisplay(DOMelement){
-  DOMelement.toggleClass('hidden');
-  DOMelement.toggleClass('displayed');
-};
-
-function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMelement){
-  clickElement.on('click', function(){
-    switchDisplay(DOMelement);
-    if(secondDOMelement){
-      switchDisplay(secondDOMelement);
-    };
-    if(thirdDOMelement){
-      switchDisplay(thirdDOMelement);
-    };
-
-  });
-};
-
 auth.bindLoginForm = function(){
   $("#login-form").on("submit", function(e){
     e.preventDefault();
@@ -332,18 +314,17 @@ function accountLinkHandler(){
   var accountLink = $("#account-link");
   var updateButton = $('#update-button');
   accountLink.on('click',function(){
-    if(accountLink.text() == "My Account"){
+    if(accountLink.text() === "My Account") {
       accountLink.text("My Forecast")
-    } else{
-      accountLink.text("My Account")
-    };
-  updateButton.on('click', function(){
-    if(accountLink.text() == 'My Account'){
-      accountLink.text('My Forecast')
-    } else {
+    }
+    else {
       accountLink.text("My Account")
     }
   })
+  updateButton.on('click', function(){
+    if(accountLink.text() === 'My Forecast') {
+      accountLink.text('My Account')
+    }
   })
 }
 
@@ -434,5 +415,4 @@ $(function(){
   deleteHandler();
   updateHandler();
   accountLinkHandler();
-
 });

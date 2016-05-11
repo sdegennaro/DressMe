@@ -68,13 +68,17 @@
             </div>
           </div>
         </div>
-        <div id="account-container" class="hidden">
+        <div id="account-container" class="hidden" style="color:white;">
           <form id="account-form">
             <div>
-              <input type="number" name="username" value="" placeholder="Username">
-              <input type="number" name="zipcode" value="" placeholder="Zipcode">
-              <input type="text" name="temp_pref" value="" placeholder="Temperature Preference">
-              <input type="number" name="text_opt_in" value="" placeholder="Text?">
+              <input type="number" name="username" value="" placeholder="Username">Username
+              <input type="number" name="zipcode" value="" placeholder="Zipcode">Zipcode
+              <input type="radio" name="gender" value="Male" >Male
+              <input type="radio" name="gender" value="Female" checked >Female
+              <input type="radio" name="temp_pref" value="Hot" >I am always hot
+              <input type="radio" name="temp_pref" value="Ok" checked >I'm usually ok
+              <input type="radio" name="temp_pref" value="Cold" >I am always cold
+              <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">Text opt in?
             </div>
             <button id="update-button" type="submit" name="button">Update</button>
             <button id="delete-button" type="submit" name="button">Delete</button>
