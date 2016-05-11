@@ -9,6 +9,7 @@ var UserSchema = mongoose.Schema({
   password: {type: String},
   zipcode: {type: String, required: true},
   temp_pref: {type: String, required: true},
+  gender: {type: String},
   is_admin: {type: Number, default: 0},
   text_opt_in: {type: Number, default: 0}
 }, { timestamps: true });
