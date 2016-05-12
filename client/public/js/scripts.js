@@ -49,6 +49,12 @@ auth.showAlert = function(msg){
   })
 };
 
+auth.showAlerts = function(msg){
+  $(".alert-msg").text(msg).fadeIn(1000, function(){
+    $(this).fadeOut(1000);
+  })
+};
+
 auth.users = {
   init: function(){
       auth.users.getAll()
@@ -304,6 +310,18 @@ function updateHandler(){
     var text_opt_in = $("#account-container").find("[name=text_opt_in]:checked").val();
     var gender = $("#account-container").find("[name=gender]:checked").val();
     var gender = gender.toLowerCase();
+    var $form   = $('#account-form');
+    var zipcode = $form.find("[name=zipcode]").val();
+    var username = $form.find('[name=username]').val();
+
+      if(zipcode.length !== 5) {
+        return auth.showAlerts("Invaild Zipcode");
+      }
+
+      if(username.length !== 10) {
+        return auth.showAlerts("Invaild Phone Number");
+      }
+
 
     auth.users.getAll()
       .done(function(users){

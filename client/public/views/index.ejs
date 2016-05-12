@@ -67,7 +67,10 @@
         <div id="account-container" class="hidden" style="color:white;">
           <form id="account-form">
             <div>
-
+              <div class="alert-msg" class="hidden">
+                <!-- Msg goes here -->
+              </div>
+            </div>
               <h4><font color="#fdd414">My Account</font></h4>
               <h6>PHONE NUMBER</h6>
               <input type="number" name="username" value="" placeholder="Username">
@@ -82,9 +85,10 @@
               <input type="radio" name="temp_pref" value="Cold" >I'm always cold
               <h6>TEXT OPT-IN</h6>
               <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">
+              <br>
+              <button id="update-button" type="submit" name="button">Update</button>
+              <button id="delete-button" type="submit" name="button">Delete</button>
             </div>
-            <button id="update-button" type="submit" name="button">Update</button>
-            <button id="delete-button" type="submit" name="button">Delete</button>
 
           </form>
         </div>
