@@ -122,12 +122,11 @@ function renderTodayInfo(object, parentElement, time){
 function renderCurrentInfo(object){
   $("#current-weather-container").empty();
   var current = object.current_condition[0];
-  var todayIn = $("<h4>").text("Today in "+ userZipcode);
-  var currentCondition = $("<p>").text("Temp: "+ current.temp_F + " °F  //  Humidity: "+ current.humidity + "%  //  Feels Like: "+ current.FeelsLikeF + " °F"  );
-  var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
-  var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF + " °F");
+  var todayIn = $("<div id=today>").text("Today in "+ userZipcode);
+  var currentTemp = $("<div id=temp>").text(current.temp_F + " °F ");
+  var currentCondition = $("<p>").text( " Humidity: "+ current.humidity + "%  //  Feels Like: "+ current.FeelsLikeF + " °F"  );
   var minMax = $("<p>").text("Min Temp: "+ object.weather[0].mintempF + " °F  //  Max Temp: "+ object.weather[0].maxtempF + " °F" );
-  $("#current-weather-container").append(todayIn, currentCondition, minMax);
+  $("#current-weather-container").append(todayIn, currentTemp, currentCondition, minMax);
   // ask Sam why this works lol
 };
 

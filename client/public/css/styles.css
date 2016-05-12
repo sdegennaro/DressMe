@@ -21,6 +21,12 @@ h2 {
   font-family: 'Bitter', serif;
 }
 
+#temp {
+  font-size: 3em;
+  color: black;
+  font-family: 'Bitter', serif;
+  margin-bottom:
+}
 
 #content-container {
 
@@ -153,6 +159,7 @@ h6 {
   font-size: 16px;
   color: white;
 }
+
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
