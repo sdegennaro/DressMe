@@ -16,6 +16,20 @@ Twilio
 
 ### USER STORIES
 
+The user must be able to sign in or sign up from the home page.
+The user must be able to create a new account using the sign up flow.
+The sign up must capture username, password, password confirm, zipcode, temperature preference, text opt in, and gender.
+Username must be a 10 digit phone number. Zipcode must be a 5 digit number. Password and password confirm must match. The form must not allow submit unless this criteria is met.
+Upon sign up, the user must be saved to the user collection in the database. Their password must be hashed for security.
+Registered users must be able to sign in using their username and password.
+Upon successful sign in, the user should see a morning, middday, and evening forecast for the zipcode saved in their profile. The user should also see an image of a clothing recommendation. This clothing recommendation is determined by the temperature and precipitation in the zipcode from their profile.
+The user must be able to see their saved profile account information.
+The user must be able to change and update their profile information.
+The user must be able to delete their account.
+After an update, the user must see a new forecast and recommendation based on the changes made.
+The admin must be able to send a text message to a registered user.
+The text message content must reflect the user's profile information(i.e. zipcode and gender) and the current forecast.
+
 ### SCREENSHOTS
 ![alt tag](http://i.imgur.com/sp8BzXp.png)
 ![alt tag](http://i.imgur.com/KaMgufa.png)
@@ -32,3 +46,6 @@ When we decided what type of app we wanted to make we spent time researching and
 ![alt tag](http://i.imgur.com/cXk19jE.png)
 ![alt tag](http://i.imgur.com/kK2yb0G.png)
 ![alt tag](http://i.imgur.com/y3LbpxO.png)
+
+### FUTURE FEATURES
+At present, text messages must be sent manually through the '/text' route. In future versions of this app, we would add restrictions so that only users who have admin status could access that route (currently all users default as non-admins). We would also like to add the ability for a user to specify a time of day to receive their text message and for the program to send it automatically.
