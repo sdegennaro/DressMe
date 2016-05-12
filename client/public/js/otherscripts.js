@@ -16,6 +16,12 @@ function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMele
   });
 };
 
-function signUpFormFlow(){
-  switchClickHandler()
+function findCurrent(){
+  $.ajax({
+    url: "api/users/currentuser",
+    method: "GET",
+    success: function(data){
+      console.log(data.username);
+    }
+  })
 }

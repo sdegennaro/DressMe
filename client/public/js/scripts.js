@@ -59,15 +59,13 @@ auth.users = {
   init: function(){
       auth.users.getAll()
         .done(function(users){
-          // auth.users.renderUsers(users);
-          var $form = $("#login-form");
-          var username = $form.find("[name=username]").val();
-          for (var i = 0; i < users.length; i++) {
-            if(users[i].username == username){
-              renderAccountInfo(users[i]);
-              return;
+          $.ajax({
+            url: "api/users/currentuser",
+            method: "GET",
+            success: function(data){
+              renderAccountInfo(data);
             }
-          }
+          })
         })
         .fail( function(jqXHR){
             console.log(jqHXR);
@@ -75,18 +73,8 @@ auth.users = {
   },
   getAll: function(){
     return $.getJSON("/api/users");
-  },
-
-  // renderUsers: function(users){
-  //   var $container = $("#users-container");
-  //   users.forEach( function(user){
-  //     var $user = $("<li>");
-  //     $user.html("Username: " + user.username + " <br/> Email: " + user.email );
-  //     $container.append($user);
-  //   });
-  // }
-
-}
+  }
+};
 
 function renderAccountInfo(userObject){
 
@@ -106,7 +94,6 @@ function renderAccountInfo(userObject){
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
-    console.log('hye');
     switchDisplay($("#sign-up-form"));
     switchDisplay($("#login-form"));
     switchDisplay($("#signup-step-1"));
@@ -130,8 +117,6 @@ auth.bindLogoutLink = function(){
     $("#evening-forecast").find('p').remove();
     $("#evening-forecast").find('img').remove();
     $('#rec-container').find('img').remove();
-    // Trying to remove the text but can't select it
-    // $('#rec-container').find('div').remove();
 
   });
 };
@@ -144,21 +129,6 @@ auth.checkLoggedInStatus= function(){
     auth.setLoggedOutState();
   }
 };
-
-var myData
-function userTest(){
-  $.ajax({
-    url: "/api/users/me",
-    type: "GET",
-    success: function(data){
-      console.log(data);
-      myData = data;
-    }
-
-  })
-}
-
-
 
 auth.getToken = function(){
   return Cookies.get("jwt_token");
@@ -174,10 +144,7 @@ auth.setLoggedOutState = function() {
   };
   $("#login-form").find('[name=username]').val("");
   $("#login-form").find('[name=password]').val("");
-  // $('#logged-in-content').toggleClass('hidden');
-  // $('#logged-in-content').toggleClass('displayed');
-  // $('.forms.container').fadeIn(1000);
-}
+};
 
 auth.bindSignUpForm = function(){
 
@@ -188,10 +155,10 @@ auth.bindSignUpForm = function(){
 
   $('#button1').on('click', function(){
     var $form    = $('#sign-up-form');
-    var zipcode = $form.find("[name=zipcode]").val();
+    var zipcode  = $form.find("[name=zipcode]").val();
     if(zipcode.length !== 5) {
       zipcode.text(auth.showAlert("Invaild Zipcode"));
-    }
+    };
   });
 
   $('#button2').on('click', function(){
@@ -201,13 +168,11 @@ auth.bindSignUpForm = function(){
     var confirm  = $form.find('[name=password_confirm]').val();
     if (confirm !== password) {
       return auth.showAlert("Passwords do not match!");
-    }
-
+    };
     if (username.length !== 10) {
       return auth.showAlert("Username isn't 10 characters");
-    }
+    };
   });
-
 };
 
 
@@ -253,7 +218,6 @@ auth.submitSignUpForm = function(){
 };
 
 auth.signUpSuccess = function(data, status, jqXHR) {
-  // console.log(data, status, jqXHR);
   switchDisplay($("#sign-up-form"));
   switchDisplay($("#login-form"));
   // should show a success alert
@@ -263,18 +227,6 @@ auth.signUpFailure = function(jqXHR) {
   auth.showAlert("There was an error. Try again!");
 }
 
-// auth.renderUserInfo = function() {
-//
-//   How can I get info from the user from the mongo database?
-//
-//   var query = $('#input').val();
-//   var key = '&key=3436ce55a40c41fc8ef154950160605';
-//   var format = '&format=json';
-//   $.getJSON('http://api.worldweatheronline.com/premium/v1/weather.ashx?q=' + query + format + key, function(data){
-//
-//   }
-//
-// };
 
 function deleteHandler(){
   $("#delete-button").on("click", function(e){
@@ -374,53 +326,6 @@ function accountLinkHandler(){
     if(accountLink.text() === 'My Forecast') {
       accountLink.text('My Account')
     }
-  })
-}
-
-function testSendSMS(){
-
-  $.ajax({
-    url: "https://api.sendhub.com/v1/messages/?username=+12039961626&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",
-    headers: {
-      "Content-Type": "application/json ",
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST'
-
-    },
-    type: "POST",
-    dataType:'jsonp',
-    data: {
-      "contacts":["+2039961626"],
-      "text":"New Test"
-    },
-    success:function(){
-      console.log('success');
-    },
-    error:function(err){
-      console.log(err);
-    }
-
-  })
-}
-
-function getSMSContacts(){
-
-  $.ajax({
-    url: "https://api.sendhub.com/v1/contacts/?username=+12037797398&api_key=448d02cb31c751f6c168774067cf90c18eac66c0",
-    headers: {
-      "Content-Type": "application/json ",
-      'Access-Control-Allow-Origin': '*',
-
-    },
-    type: "GET",
-    dataType:'jsonp',
-    success:function(data){
-      console.log('success got ' + data);
-    },
-    error:function(err){
-      console.log(err);
-    }
-
   })
 }
 
