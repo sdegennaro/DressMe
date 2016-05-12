@@ -23,7 +23,7 @@
     <div>
       <div id="landing-container" class="displayed">
         <h1>Dress Me</h1>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+        <span>Welcome to DressMe! We're here to help you dress for the weather. We'll make sure you're prepared for any possible weather changes in your area. Sign up for a daily weather report and outfit recommendation to get the most out of your account!</span>
         <br>
         <button type="button" id="landing-cta-button">Get Dressed</button><br>
         <a href="#" id='landing-login-link'>Already signed up? Log in</a>
@@ -43,7 +43,7 @@
         <div id='content-container' class="displayed">
           <div class="container">
             <div class="row">
-              <div class = "six columns">
+              <div class="six columns">
                 <div id="weather-forecast">
                   <div id="morning-forecast">
                     <h4>Morning</h4>
@@ -71,13 +71,19 @@
         <div id="account-container" class="hidden" style="color:white;">
           <form id="account-form">
             <div>
-              <input type="number" name="username" value="" placeholder="Username">Username
-              <input type="number" name="zipcode" value="" placeholder="Zipcode">Zipcode
-              <input type="radio" name="gender" value="Male" >Male
-              <input type="radio" name="gender" value="Female" checked >Female
-              <input type="radio" name="temp_pref" value="Hot" >I am always hot
-              <input type="radio" name="temp_pref" value="Ok" checked >I'm usually ok
-              <input type="radio" name="temp_pref" value="Cold" >I am always cold
+              Username<input type="number" name="username" value="" placeholder="Username">
+              Zipcode<input type="number" name="zipcode" value="" placeholder="Zipcode">Gender
+              <select>
+                <option name="gender" value="Male" >Male
+                <option name="gender" value="Female" checked >Female
+              </select>
+              <p style='display:inline-block'>Temp Pref</p>
+              <select>
+                <option type="radio" name="temp_pref" value="Hot">I am always hot
+                <option type="radio" name="temp_pref" value="Ok" checked>I'm usually ok
+                <option type="radio" name="temp_pref" value="Cold">I am always cold
+              </select>
+              <br>
               <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">Text opt in?
             </div>
             <button id="update-button" type="submit" name="button">Update</button>
@@ -93,8 +99,8 @@
           <form id="login-form" class="hidden">
             <h1>Dress Me</h1>
             <div>
-              <input type="text" name="username" value="" placeholder="Phone Number">
-              <input type="password" name="password" value="" placeholder="Password">
+              Phone Number<input type="text" name="username" value="" placeholder="Phone Number">
+              Password<input type="password" name="password" value="" placeholder="Password">
             </div>
             <button type="submit" name="button">Log in</button>
             <div class="form-group">
@@ -116,16 +122,20 @@
             </div>
             <div class="form-group hidden" id='signup-step-2'>
               <h3>Gender?</h3>
-              <input type="radio" name="gender" value="Male" >Male
-              <input type="radio" name="gender" value="Female" checked >Female
+              <select>
+                <option name="gender" value="Male" >Male
+                <option name="gender" value="Female" checked >Female
+              </select>
               <br>
               <button type="button" name="button-2">Next</button>
             </div>
             <div class="form-group hidden" id='signup-step-3'>
               <h3>How do you feel?</h3>
-              <input type="radio" name="temp_pref" value="Hot" >I am always hot
-              <input type="radio" name="temp_pref" value="Ok" checked >I'm usually ok
-              <input type="radio" name="temp_pref" value="Cold" >I am always cold
+              <select>
+                <option name="temp_pref" value="Hot" >I am always hot
+                <option name="temp_pref" value="Ok" checked >I'm usually ok
+                <option name="temp_pref" value="Cold" >I am always cold
+              </select>
               <br>
               <button type="button" name="button-3">Next</button>
             </div>

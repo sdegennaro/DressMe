@@ -97,7 +97,6 @@ function renderAccountInfo(userObject){
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
-
       switchDisplay($("#sign-up-form"));
       switchDisplay($("#login-form"));
   });
