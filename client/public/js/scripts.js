@@ -100,9 +100,13 @@ function renderAccountInfo(userObject){
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
-      switchDisplay($("#sign-up-form"));
-      switchDisplay($("#login-form"));
+    switchDisplay($("#sign-up-form"));
+    switchDisplay($("#login-form"));
   });
+  // $('#landing-login-link').on('click', function(){
+  //   switchDisplay($('#landing-container'));
+  //   switchDisplay($('#login-form'));
+  // })
 };
 
 auth.bindLogoutLink = function(){
@@ -167,9 +171,18 @@ auth.setLoggedOutState = function() {
 }
 
 auth.bindSignUpForm = function(){
+
   $('#sign-up-form').on('submit', function(e) {
     e.preventDefault();
     auth.submitSignUpForm();
+  });
+
+  $('#button1').on('click', function(){
+    var $form    = $('#sign-up-form');
+    var zipcode = $form.find("[name=zipcode]").val();
+    if(zipcode.length !== 5) {
+      zipcode.text(auth.showAlert("Invaild Zipcode"));
+    }
   });
 };
 
@@ -192,9 +205,6 @@ auth.submitSignUpForm = function(){
     return auth.showAlert("Username isn't 10 characters");
   }
 
-  if(zipcode.length !== 5) {
-    return auth.showAlert("Zipcode isn't 5 characters");
-  }
 
   if(+zipcode == NaN) {
     return auth.showAlert("Zipcode is invaild");
