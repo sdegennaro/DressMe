@@ -272,8 +272,8 @@ function updateHandler(){
     var zipcode = $("#account-container").find("[name=zipcode]").val();
     var temp_pref = $("#account-container").find("[name=temp_pref]").val();
     var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
-    gender = $("#account-container").find("[name=gender]").val();
-    gender = gender.toLowerCase();
+    var gender = $("#account-container").find("[name=gender]:checked").val();
+    var gender = gender.toLowerCase();
 
     auth.users.getAll()
       .done(function(users){
@@ -317,7 +317,6 @@ function accountLinkHandler(){
   var accountLink = $("#account-link");
   var updateButton = $('#update-button');
   accountLink.on('click',function(){
-    console.log("account link clicked");
     if(accountLink.text() === "My Account") {
       accountLink.text("My Forecast")
     }

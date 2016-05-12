@@ -29,11 +29,14 @@ function getUserZipcode(){
 }
 
 function getGender(){
+  console.log("gender in getGender: " + userGender);
   $('#update-button').click(function(){
-    userGender = $("#account-container").find("[name=gender]").val()
+    userGender = $("input[name=gender]:checked").val()
   });
-  userGender = $("#account-container").find("[name=gender]").val()
+  //userGender = $("#account-container").find("[name=gender]:checked").val()
+  userGender = $("input[name=gender]:checked").val();
   userGender = userGender.toLowerCase();
+  console.log("end gender in getGender: " + userGender);
 }
 
 function makeBaseLink(keyString){
