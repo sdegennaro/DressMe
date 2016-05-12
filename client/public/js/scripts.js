@@ -274,7 +274,6 @@ function updateHandler(){
     var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
     gender = $("#account-container").find("[name=gender]").val();
     gender = gender.toLowerCase();
-    console.log("Gender on update: " + gender);
 
     auth.users.getAll()
       .done(function(users){
