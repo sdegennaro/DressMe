@@ -3,12 +3,16 @@
 DressMe is an app that helps you dress for the weather. Once an account is created and the user is logged in, daily weather information is displayed along with an outfit that corresponds to the conditions and user preferences. Additionally, a user can opt-in to receive a daily text alert with an outfit recommendation.
 
 ### TECHNOLOGY
-Javascript
+Javascript/JQuery
 Node
 Express
 CSS
 HTML
 Skeleton
+
+Third Party APIs:
+World Weather Online Local API (http://developer.worldweatheronline.com/api/local-city-town-weather-api.aspx)
+Twilio
 
 ### USER STORIES
 
