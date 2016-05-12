@@ -21,10 +21,6 @@ h2 {
   font-family: 'Bitter', serif;
 }
 
-h1 {
-  color: #fdd414;
-  font-family: 'Bitter', serif;
-}
 
 #content-container {
 
@@ -58,7 +54,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #sign-up-form {
   background-color: rgba(0,0,0,.8);
-  width: 60%;
+  width: 45%;
   padding: 3em;
   margin: auto;
   text-align: center;
@@ -69,7 +65,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #login-form {
   background-color: rgba(0,0,0,.8);
-  width: 60%;
+  width: 45%;
   padding: 3em;
   margin: auto;
   text-align: center;
@@ -83,12 +79,6 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 2%;
   margin: auto;
   text-align: center;
-
-  @media only screen and (max-width: 768px) {
-    width: 90%;
-  }
-
-
 }
 
 #logged-in-container {
@@ -99,7 +89,6 @@ input[type=number]::-webkit-outer-spin-button {
   padding-bottom: 3%;
   margin: -1%;
 }
-
 
 
 #logged-in {
@@ -182,4 +171,23 @@ a:hover {
 
 button:hover {
     color: #fdd414;
+}
+
+/*@media only screen and (max-width: 768px) {
+  #account-container {width: 90%;)
+  #landing-container {width: 90%;)
+}*/
+
+@media(max-width: 375px){
+
+  #account-container{
+    width: 90%;
+  }
+
+  #landing-container {
+    width: 90%;
+    padding: 1em;
+    margin-top: 25%;
+  }
+
 }
