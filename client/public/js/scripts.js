@@ -87,7 +87,6 @@ function renderAccountInfo(userObject){
   $("#account-container").find("[name=username]").val(userObject.username);
   $("#account-container").find("[name=zipcode]").val(userObject.zipcode);
   $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
-  $("#account-container").find("[name=is_admin]").val(userObject.is_admin);
   $("#account-container").find("[name=gender]").val(userObject.gender);
   $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
   getUserZipcode();
@@ -172,15 +171,16 @@ auth.bindSignUpForm = function(){
   });
 };
 
+
 auth.submitSignUpForm = function(){
   var $form    = $('#sign-up-form');
   var username = $form.find('[name=username]').val();
   var password = $form.find('[name=password]').val();
   var confirm  = $form.find('[name=password_confirm]').val();
   var zipcode = $form.find("[name=zipcode]").val();
-  var gender = $form.find("[name=gender]").val();
-  var temp_pref = $form.find("[name=temp_pref]").val();
-  var text_opt_in = $form.find("[name=text_opt_in]").val();
+  var gender = $form.find("[name=gender]:checked").val();
+  var temp_pref = $form.find("[name=temp_pref]:checked").val();
+  var text_opt_in = $form.find("[name=text_opt_in]:checked").val();
 
   if (confirm !== password) {
     return auth.showAlert("Passwords do not match!");
@@ -204,11 +204,12 @@ auth.submitSignUpForm = function(){
       password: password,
       zipcode: zipcode,
       temp_pref: temp_pref,
-      is_admin: is_admin,
       text_opt_in: text_opt_in,
       gender: gender
     }
   };
+
+  console.log(payload);
 
   $.post('/api/users', payload)
     .done(auth.signUpSuccess)
@@ -270,7 +271,6 @@ function updateHandler(){
     var username = $("#account-container").find("[name=username]").val();
     var zipcode = $("#account-container").find("[name=zipcode]").val();
     var temp_pref = $("#account-container").find("[name=temp_pref]").val();
-    var is_admin = $("#account-container").find("[name=is_admin]").val();
     var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
     gender = $("#account-container").find("[name=gender]").val();
     gender = gender.toLowerCase();
@@ -288,9 +288,8 @@ function updateHandler(){
                 username: username,
                 zipcode: zipcode,
                 temp_pref: temp_pref,
-                is_admin: is_admin,
-                text_opt_in: text_opt_in,
-                gender: gender
+                gender: gender,
+                text_opt_in: text_opt_in
               },
               success: function(data){
                 console.log(data);
