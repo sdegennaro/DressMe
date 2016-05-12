@@ -14,16 +14,34 @@ function sendText(message, toPhone){
   });
 };
 
-function textButtonHandler(number){
+function textButtonHandler(){
   $("#text-test-button").on("click",function(){
-    console.log($("#text-test-input").val());
+    var number = ($("#text-test-input").val());
     $.ajax({
+      method: 'get',
       url:"api/users/user",
       data: {
         username : number,
       },
       success: function(data){
-        console.log(data);
+        $.ajax({
+          method:"get",
+          url: makeQueryLink(data.zipcode,"JSON","1"),
+          success: function(data){
+            checkForRain(data.data.weather[0]);
+            checkForSnow(data.data.weather[0]);
+
+            console.log(willRain);
+            $.ajax({
+              url: '/api/recommendations?degrees=' + lowTemp +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
+              type: 'GET',
+              success: function(recommendation){
+                console.log(recommendation);
+                console.log(recommendation.text);
+              }
+            })
+          }
+        })
       }
     })
   })
