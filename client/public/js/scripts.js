@@ -321,7 +321,6 @@ function updateHandler(){
                 text_opt_in: text_opt_in
               },
               success: function(data){
-                console.log(data);
                 $('#morning-forecast').find('p').remove();
                 $('#morning-forecast').find('img').remove();
                 $("#midday-forecast").find('p').remove();
@@ -347,7 +346,6 @@ function accountLinkHandler(){
   var accountLink = $("#account-link");
   var updateButton = $('#update-button');
   accountLink.on('click',function(){
-    console.log("account link clicked");
     if(accountLink.text() === "My Account") {
       accountLink.text("My Forecast")
     }

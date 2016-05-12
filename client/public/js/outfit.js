@@ -3,6 +3,7 @@ function getRec(){
   console.log("rain: " + willRain);
   console.log("snow: " + willSnow);
   console.log("gender: " + userGender);
+  getGender();
   $.ajax({
     url: '/api/recommendations?degrees=' + lowTemp +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
     type: 'GET',
