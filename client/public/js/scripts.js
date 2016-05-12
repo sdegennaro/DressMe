@@ -99,9 +99,13 @@ function renderAccountInfo(userObject){
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
-      switchDisplay($("#sign-up-form"));
-      switchDisplay($("#login-form"));
+    switchDisplay($("#sign-up-form"));
+    switchDisplay($("#login-form"));
   });
+  // $('#landing-login-link').on('click', function(){
+  //   switchDisplay($('#landing-container'));
+  //   switchDisplay($('#login-form'));
+  // })
 };
 
 auth.bindLogoutLink = function(){
@@ -166,9 +170,18 @@ auth.setLoggedOutState = function() {
 }
 
 auth.bindSignUpForm = function(){
+  
   $('#sign-up-form').on('submit', function(e) {
     e.preventDefault();
     auth.submitSignUpForm();
+  });
+
+  $('#button1').on('click', function(){
+    var $form    = $('#sign-up-form');
+    var zipcode = $form.find("[name=zipcode]").val();
+    if(zipcode.length !== 5) {
+      zipcode.text(auth.showAlert("Zipcode isn't 5 characters"));
+    }
   });
 };
 
@@ -190,9 +203,6 @@ auth.submitSignUpForm = function(){
     return auth.showAlert("Username isn't 10 characters");
   }
 
-  if(zipcode.length !== 5) {
-    return auth.showAlert("Zipcode isn't 5 characters");
-  }
 
   if(+zipcode == NaN) {
     return auth.showAlert("Zipcode is invaild");
@@ -204,7 +214,6 @@ auth.submitSignUpForm = function(){
       password: password,
       zipcode: zipcode,
       temp_pref: temp_pref,
-      is_admin: is_admin,
       text_opt_in: text_opt_in,
       gender: gender
     }
@@ -408,7 +417,7 @@ $(function(){
   auth.bindLogoutLink();
   switchClickHandler(landingCTAbutton, landingContainer, signupForm, signupStep1);
   switchClickHandler(signupButton1, signupStep1, signupStep2);
-  switchClickHandler(signupButton2, signupStep2, signupStep3);
+  // switchClickHandler(signupButton2, signupStep2, signupStep3);
   switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
   deleteHandler();
