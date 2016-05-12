@@ -84,7 +84,6 @@ function getTodayInfo(object){
 function checkForRain(hourly){
   for (var i = 0; i<hourly.length; i ++){
     if ( hourly[i].chanceofrain > 40) {
-      console.log(hourly[i].chanceofrain + "is greater than 40")
       willRain = true;
     }
   }
@@ -93,7 +92,6 @@ function checkForRain(hourly){
 function checkForSnow(hourly){
   for (var i = 0; i<hourly.length; i ++){
     if ( hourly[i].chanceofsnow > 10) {
-      console.log(hourly[i].chanceofsnow + "is greater than 10")
       willSnow = true;
     }
   }
