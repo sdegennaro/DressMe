@@ -317,6 +317,7 @@ function accountLinkHandler(){
   var accountLink = $("#account-link");
   var updateButton = $('#update-button');
   accountLink.on('click',function(){
+    console.log("account link clicked");
     if(accountLink.text() === "My Account") {
       accountLink.text("My Forecast")
     }
@@ -409,7 +410,7 @@ $(function(){
   switchClickHandler(signupButton2, signupStep2, signupStep3);
   switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
+  accountLinkHandler();
   deleteHandler();
   updateHandler();
-  accountLinkHandler();
 });
