@@ -23,21 +23,22 @@ function textButtonHandler(){
       data: {
         username : number,
       },
-      success: function(data){
+      success: function(userData){
         $.ajax({
           method:"get",
-          url: makeQueryLink(data.zipcode,"JSON","1"),
-          success: function(data){
-            checkForRain(data.data.weather[0]);
-            checkForSnow(data.data.weather[0]);
-
-            console.log(willRain);
+          url: makeQueryLink(userData.zipcode,"JSON","1"),
+          success: function(weatherData){
+            var hourlyWeather = weatherData.data.weather[0].hourly;
+            checkForRain(hourlyWeather);
+            checkForSnow(hourlyWeather);
+            var userGender = userData.gender;
+            var tempNow = weatherData.data.current_condition[0].temp_F;
             $.ajax({
-              url: '/api/recommendations?degrees=' + lowTemp +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
+              url: '/api/recommendations?degrees=' + tempNow +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
               type: 'GET',
               success: function(recommendation){
-                console.log(recommendation);
-                console.log(recommendation.text);
+                sendText(recommendation.rec[0].text, userData.username);
+
               }
             })
           }
