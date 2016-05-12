@@ -86,8 +86,10 @@ function renderAccountInfo(userObject){
 
   $("#account-container").find("[name=username]").val(userObject.username);
   $("#account-container").find("[name=zipcode]").val(userObject.zipcode);
-  $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
-  $("#account-container").find("[name=gender]").val(userObject.gender);
+  $("#account-container").find("[name=temp_pref]").prop('checked', false);
+  $("#account-container").find("[name=gender]").prop('checked', false);
+  $("#account-container").find("[name=temp_pref][value="+userObject.temp_pref+"]").prop('checked', true);
+  $("#account-container").find("[name=gender][value="+userObject.gender+"]").prop('checked', true);
   $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
   getUserZipcode();
   getGender();
@@ -270,8 +272,8 @@ function updateHandler(){
     e.preventDefault();
     var username = $("#account-container").find("[name=username]").val();
     var zipcode = $("#account-container").find("[name=zipcode]").val();
-    var temp_pref = $("#account-container").find("[name=temp_pref]").val();
-    var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
+    var temp_pref = $("#account-container").find("[name=temp_pref]:checked").val();
+    var text_opt_in = $("#account-container").find("[name=text_opt_in]:checked").val();
     var gender = $("#account-container").find("[name=gender]:checked").val();
     var gender = gender.toLowerCase();
 
@@ -291,7 +293,6 @@ function updateHandler(){
                 text_opt_in: text_opt_in
               },
               success: function(data){
-                console.log(data);
                 $('#morning-forecast').find('p').remove();
                 $('#morning-forecast').find('img').remove();
                 $("#midday-forecast").find('p').remove();

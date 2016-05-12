@@ -29,14 +29,11 @@ function getUserZipcode(){
 }
 
 function getGender(){
-  console.log("gender in getGender: " + userGender);
   $('#update-button').click(function(){
     userGender = $("input[name=gender]:checked").val()
   });
-  //userGender = $("#account-container").find("[name=gender]:checked").val()
   userGender = $("input[name=gender]:checked").val();
   userGender = userGender.toLowerCase();
-  console.log("end gender in getGender: " + userGender);
 }
 
 function makeBaseLink(keyString){
@@ -124,10 +121,7 @@ function renderTodayInfo(object, parentElement, time){
 
 function renderCurrentInfo(object){
   $("#current-weather-container").empty();
-  console.log("here");
-  console.log(object);
   var current = object.current_condition[0];
-  console.log(current);
   var todayIn = $("<h4>").text("Today in "+ userZipcode);
   var currentCondition = $("<p>").text("Temp: "+ current.temp_F + " °F  //  Humidity: "+ current.humidity + "%  //  Feels Like: "+ current.FeelsLikeF + " °F"  );
   var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
