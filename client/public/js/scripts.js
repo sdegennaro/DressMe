@@ -182,6 +182,21 @@ auth.bindSignUpForm = function(){
       zipcode.text(auth.showAlert("Invaild Zipcode"));
     }
   });
+
+  $('#button2').on('click', function(){
+    var $form    = $('#sign-up-form');
+    var username = $form.find('[name=username]').val();
+    var password = $form.find('[name=password]').val();
+    var confirm  = $form.find('[name=password_confirm]').val();
+    if (confirm !== password) {
+      return auth.showAlert("Passwords do not match!");
+    }
+
+    if (username.length !== 10) {
+      return auth.showAlert("Username isn't 10 characters");
+    }
+  });
+
 };
 
 
