@@ -335,7 +335,6 @@ function updateHandler(){
           }
         }
       })
-      getRec();
       switchDisplay($('#content-container'));
       switchDisplay($('#account-container'));
   })
