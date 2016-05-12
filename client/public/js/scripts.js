@@ -179,7 +179,7 @@ auth.bindSignUpForm = function(){
     var $form    = $('#sign-up-form');
     var zipcode = $form.find("[name=zipcode]").val();
     if(zipcode.length !== 5) {
-      zipcode.text(auth.showAlert("Zipcode isn't 5 characters"));
+      zipcode.text(auth.showAlert("Invaild Zipcode"));
     }
   });
 };
