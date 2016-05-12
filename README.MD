@@ -11,7 +11,7 @@ HTML
 Skeleton
 
 Third Party APIs:
-World Weather Online Local API (http://developer.worldweatheronline.com/api/local-city-town-weather-api.aspx)
+[World Weather Online Local API](http://developer.worldweatheronline.com/api/local-city-town-weather-api.aspx)
 Twilio
 
 ### USER STORIES
