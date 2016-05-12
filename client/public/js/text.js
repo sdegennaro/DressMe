@@ -40,7 +40,7 @@ function textButtonHandler(){
               success: function(recommendation){
                 console.log(recommendation.rec[0].text);
                 console.log(recommendation.rec[0]);
-                // sendText(recommendation.rec[0].text, userData.username);
+                sendText(recommendation.rec[0].text, userData.username);
 
               }
             })
