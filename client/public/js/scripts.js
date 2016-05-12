@@ -386,6 +386,11 @@ function setSignupStep1Button(){
 
 }
 
+function newLoginHandler(){
+  $("#landing-login-link").on('click', function(){
+    console.log('yo');
+  })
+};
 
 $(function(){
   var landingCTAbutton = $("#landing-cta-button");
@@ -407,10 +412,11 @@ $(function(){
   auth.bindLogoutLink();
   switchClickHandler(landingCTAbutton, landingContainer, signupForm, signupStep1);
   switchClickHandler(signupButton1, signupStep1, signupStep2);
-  switchClickHandler(signupButton2, signupStep2, signupStep3);
+  switchClickHandler(signupButton2, signupStep2);
   switchClickHandler(landingLoginLink, landingContainer, loginForm);
   switchClickHandler(accountLink, contentContainer, accountContainer);
   accountLinkHandler();
   deleteHandler();
   updateHandler();
+
 });
