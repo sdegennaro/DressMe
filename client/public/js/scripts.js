@@ -130,6 +130,7 @@ auth.checkLoggedInStatus= function(){
     auth.setLoggedOutState();
   }
 };
+
 var myData
 function userTest(){
   $.ajax({
@@ -177,10 +178,8 @@ auth.submitSignUpForm = function(){
   var password = $form.find('[name=password]').val();
   var confirm  = $form.find('[name=password_confirm]').val();
   var zipcode = $form.find("[name=zipcode]").val();
-  gender = $form.find("[name=gender]").val();
-  console.log("gender: " + gender);
+  var gender = $form.find("[name=gender]").val();
   var temp_pref = $form.find("[name=temp_pref]").val();
-  var is_admin = $form.find("[name=is_admin]").val();
   var text_opt_in = $form.find("[name=text_opt_in]").val();
 
   if (confirm !== password) {
