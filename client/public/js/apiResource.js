@@ -5,8 +5,10 @@ var baseURL;
 var queryURL;
 var userZipcode;
 var currentTemp = 0;
+var currentTempPref = 0
 var willRain = false;
 var willSnow = false;
+var tempPref;
 var userGender;
 
 function getKey(){
@@ -34,6 +36,23 @@ function getGender(){
   });
   userGender = $("input[name=gender]:checked").val();
   userGender = userGender.toLowerCase();
+}
+
+function getPref(){
+  $('#update-button').click(function(){
+    tempPref= $("input[name=temp_pref]:checked").val()
+  });
+  tempPref = $("input[name=temp_pref]:checked").val();
+  tempPref = tempPref.toLowerCase();
+  if (tempPref == "hot"){
+    currentTempPref = currentTemp - 3;
+  }
+  else if (tempPref == "ok"){
+    currentTempPref = currentTemp;
+  }
+  else if (tempPref == "cold"){
+    currentTempPref = currentTemp + 3;
+  }
 }
 
 function makeBaseLink(keyString){

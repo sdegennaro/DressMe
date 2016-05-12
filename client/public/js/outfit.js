@@ -1,11 +1,13 @@
 function getRec(){
-  console.log("temp: " + currentTemp);
+  getGender();
+  getPref();
+  console.log("actual temp: " + currentTemp);
   console.log("rain: " + willRain);
   console.log("snow: " + willSnow);
   console.log("gender: " + userGender);
-  getGender();
+  console.log("temp w preference: " + currentTempPref);
   $.ajax({
-    url: '/api/recommendations?degrees=' + currentTemp +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
+    url: '/api/recommendations?degrees=' + currentTempPref +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
     type: 'GET',
     success: function(recommendation){
       renderOutfit(recommendation);
@@ -16,7 +18,6 @@ function getRec(){
 
 function renderOutfit(object){
   $("#outfit-container").empty();
-  console.log(object);
   var image = object.rec[0].outfit;
   var name = object.rec[0].name;
   console.log("Today's Recommendation: " + name);
