@@ -317,7 +317,7 @@ function accountLinkHandler(){
   accountLink.on('click',function(){
     if(accountLink.text() === "My Account") {
       accountLink.text("My Forecast")
-    };
+    }
     else {
       accountLink.text("My Account")
     };
