@@ -54,7 +54,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #sign-up-form {
   background-color: rgba(0,0,0,.8);
-  width: 60%;
+  width: 45%;
   padding: 3em;
   margin: auto;
   text-align: center;
@@ -65,7 +65,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 #login-form {
   background-color: rgba(0,0,0,.8);
-  width: 60%;
+  width: 45%;
   padding: 3em;
   margin: auto;
   text-align: center;
