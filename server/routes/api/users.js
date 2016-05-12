@@ -26,6 +26,14 @@ usersRouter.get('/', function(req, res, next) {
 
 });
 
+usersRouter.get('/user', function(req, res, next) {
+  var username = req.body.username;
+  User.find(req.body, function( err, dbUsers ){
+    res.json( dbUsers );
+    });
+
+});
+
 usersRouter.get('/me', function(req, res, next) {
   res.json( req.user );
 });

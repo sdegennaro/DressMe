@@ -14,9 +14,18 @@ function sendText(message, toPhone){
   });
 };
 
-function textButtonHandler(){
+function textButtonHandler(number){
   $("#text-test-button").on("click",function(){
     console.log($("#text-test-input").val());
+    $.ajax({
+      url:"api/users/user",
+      data: {
+        username : number,
+      },
+      success: function(data){
+        console.log(data);
+      }
+    })
   })
 };
 
