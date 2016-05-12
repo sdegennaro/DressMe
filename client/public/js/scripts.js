@@ -88,6 +88,7 @@ function renderAccountInfo(userObject){
   $("#account-container").find("[name=zipcode]").val(userObject.zipcode);
   $("#account-container").find("[name=temp_pref]").val(userObject.temp_pref);
   $("#account-container").find("[name=is_admin]").val(userObject.is_admin);
+  $("#account-container").find("[name=gender]").val(userObject.gender);
   $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
   getUserZipcode();
   makeQueryLink(userZipcode,"json",2);
@@ -176,8 +177,8 @@ auth.submitSignUpForm = function(){
   var password = $form.find('[name=password]').val();
   var confirm  = $form.find('[name=password_confirm]').val();
   var zipcode = $form.find("[name=zipcode]").val();
-  var gender = $form.find("[name=gender]").val();
-  console.log(gender);
+  gender = $form.find("[name=gender]").val();
+  console.log("gender: " + gender);
   var temp_pref = $form.find("[name=temp_pref]").val();
   var is_admin = $form.find("[name=is_admin]").val();
   var text_opt_in = $form.find("[name=text_opt_in]").val();
@@ -272,8 +273,9 @@ function updateHandler(){
     var temp_pref = $("#account-container").find("[name=temp_pref]").val();
     var is_admin = $("#account-container").find("[name=is_admin]").val();
     var text_opt_in = $("#account-container").find("[name=text_opt_in]").val();
-    var gender = $("#account-container").find("[name=gender]").val();
-    console.log(gender);
+    gender = $("#account-container").find("[name=gender]").val();
+    gender = gender.toLowerCase();
+    console.log("Gender on update: " + gender);
 
     auth.users.getAll()
       .done(function(users){

@@ -37,7 +37,7 @@
       <div id="logged-in-container" class="hidden">
         <header id='logged-in'>
           <h1>Dress Me</h1>
-          <a href="#" id="account-link">My Account</a> | 
+          <a href="#" id="account-link">My Account</a> |
           <a href="#" id="log-out-link">Logout</a>
         </header>
 
@@ -72,14 +72,19 @@
         <div id="account-container" class="hidden" style="color:white;">
           <form id="account-form">
             <div>
-              <input type="number" name="username" value="" placeholder="Username">Username
-              <input type="number" name="zipcode" value="" placeholder="Zipcode">Zipcode
-              <input type="radio" name="gender" value="Male" >Male
-              <input type="radio" name="gender" value="Female" checked >Female
+              <p>USERNAME</p>
+              <input type="number" name="username" value="" placeholder="Username">
+              <p>ZIPCODE</p>
+              <input type="number" name="zipcode" value="" placeholder="Zipcode">
+              <p>GENDER</p>
+              <input type="radio" name="gender" value="male" >Male
+              <input type="radio" name="gender" value="female" checked >Female
+              <p>PREFERENCE</p>
               <input type="radio" name="temp_pref" value="Hot" >I'm always hot
               <input type="radio" name="temp_pref" value="Ok" checked >I'm usually ok
               <input type="radio" name="temp_pref" value="Cold" >I'm always cold
-              <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">Text opt in?
+              <p>TEXT OPT-IN</p>
+              <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">
             </div>
             <button id="update-button" type="submit" name="button">Update</button>
             <button id="delete-button" type="submit" name="button">Delete</button>
