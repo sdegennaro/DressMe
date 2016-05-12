@@ -8,8 +8,6 @@ function getRec(){
     type: 'GET',
     success: function(recommendation){
       renderOutfit(recommendation);
-      console.log("got recommendation!");
-      askTheWeather();
     }
   })
 }

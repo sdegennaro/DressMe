@@ -7,7 +7,7 @@ var userZipcode;
 var lowTemp = 0;
 var willRain = false;
 var willSnow = false;
-var gender = "default"; // needs to be updated on user signup
+var gender = "female";
 
 function getKey(){
   $.ajax({
@@ -22,10 +22,10 @@ function getKey(){
 function getUserZipcode(){
   $('#update-button').click(function(){
     userZipcode = $("#account-container").find("[name=zipcode]").val()
-    $('#current-weather-container').html('<h3>Today in ' + userZipcode + '</h3>');
+    $('#current-weather--container').html('<h3>Today in ' + userZipcode + '</h3>');
   });
   userZipcode = $("#account-container").find("[name=zipcode]").val()
-  $('#current-weather-container').html('<h3>Today in ' + userZipcode + '</h3>');
+  $('#current-weather--container').html('<h3>Today in ' + userZipcode + '</h3>');
 }
 
 function makeBaseLink(keyString){
@@ -58,11 +58,9 @@ var userInfoAPI = userInfoAPI || {};
 function getLowForToday(weather){
   var temp = weather.mintempF;
   lowTemp = parseInt(temp);
-  console.log("low temp: " + lowTemp);
 };
 
 function getTodayInfo(object){
-  console.log(object);
   var today = object.weather[0].hourly
   var morning = today[2]
   var midday = today[4]
@@ -104,7 +102,6 @@ function renderTodayInfo(object, parentElement, time){
   else if (time == "evening"){
     var dayTime = $("<h4>").text("EVENING");
   }
-  console.log( "Day Time : " + dayTime);
   var tempP = $("<p>").text("Temp: "+ object.tempF + " °F");
 //  var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
 //  var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF + " °F");
@@ -115,12 +112,14 @@ function renderTodayInfo(object, parentElement, time){
 };
 
 function renderCurrentInfo(object){
-  $("#current-weather-container").remove('p');
+  $("#current-weather-container").empty();
+  console.log(userZipcode);
+  var todayIn = $("<h3>").text("TODAY IN "+ userZipcode);
   var currentCondition = $("<p>").text("Temp: "+ object.temp_F + " °F  |  Humidity: "+ object.humidity + "%  |  Feels Like: "+ object.FeelsLikeF + " °F"  );
   var humidityP = $("<p>").text("Humidity: "+ object.humidity + "%");
   var feelsLikeP = $("<p>").text("Feels Like: "+ object.FeelsLikeF + " °F");
 //  var weatherIcon = $('<img>').attr('src', object.weatherIconUrl[0].value);
-  $("#current-weather-container").append(currentCondition);
+  $("#current-weather-container").append(todayIn, currentCondition);
   // ask Sam why this works lol
 };
 
