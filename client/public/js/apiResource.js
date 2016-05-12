@@ -140,7 +140,7 @@ function renderTodayInfo(object, parentElement, time){
 function renderCurrentInfo(object){
   $("#current-weather-container").empty();
   var current = object.current_condition[0];
-  var todayIn = $("<div id=today>").text("Today in "+ userZipcode);
+  var todayIn = $("<p>").text("Today in "+ userZipcode);
   var currentTemp = $("<div id=temp>").text(current.temp_F + " °F ");
   var currentCondition = $("<p>").text( " Humidity: "+ current.humidity + "%  //  Feels Like: "+ current.FeelsLikeF + " °F"  );
   var minMax = $("<p>").text("Min Temp: "+ object.weather[0].mintempF + " °F  //  Max Temp: "+ object.weather[0].maxtempF + " °F" );
