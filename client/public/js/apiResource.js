@@ -7,7 +7,7 @@ var userZipcode;
 var lowTemp = 0;
 var willRain = false;
 var willSnow = false;
-var gender;
+var userGender;
 
 function getKey(){
   $.ajax({
@@ -30,10 +30,10 @@ function getUserZipcode(){
 
 function getGender(){
   $('#update-button').click(function(){
-    gender = $("#account-container").find("[name=gender]").val()
+    userGender = $("#account-container").find("[name=gender]").val()
   });
-  gender = $("#account-container").find("[name=gender]").val()
-  gender = gender.toLowerCase();
+  userGender = $("#account-container").find("[name=gender]").val()
+  userGender = userGender.toLowerCase();
 }
 
 function makeBaseLink(keyString){
