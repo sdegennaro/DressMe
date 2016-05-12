@@ -39,6 +39,8 @@ router.get('/key',function(req,res,next){
   res.json({API_KEY: process.env.WEATHER_API_KEY})
 })
 
-
+router.get('/text', function(req, res, next) {
+  res.render('texttest');
+});
 
 module.exports = router;
