@@ -1,11 +1,11 @@
 function getRec(){
-  console.log("temp: " + lowTemp);
+  console.log("temp: " + currentTemp);
   console.log("rain: " + willRain);
   console.log("snow: " + willSnow);
   console.log("gender: " + userGender);
   getGender();
   $.ajax({
-    url: '/api/recommendations?degrees=' + lowTemp +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
+    url: '/api/recommendations?degrees=' + currentTemp +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
     type: 'GET',
     success: function(recommendation){
       renderOutfit(recommendation);

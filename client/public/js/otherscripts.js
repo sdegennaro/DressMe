@@ -5,7 +5,6 @@ function switchDisplay(DOMelement){
 
 function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMelement){
   clickElement.on('click', function(){
-    console.log('click')
     switchDisplay(DOMelement);
     if(secondDOMelement){
       switchDisplay(secondDOMelement);
