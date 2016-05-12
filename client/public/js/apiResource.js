@@ -4,7 +4,7 @@ var weatherKey;
 var baseURL;
 var queryURL;
 var userZipcode;
-var lowTemp = 0;
+var currentTemp = 0;
 var willRain = false;
 var willSnow = false;
 var userGender;
@@ -55,7 +55,7 @@ function askTheWeather(method, link, payload){
       getTodayInfo(data.data);
       checkForRain(data.data.weather[0].hourly);
       checkForSnow(data.data.weather[0].hourly);
-      getLowForToday(data.data.weather[0]);
+      getCurrentTemp(data.data.current_condition[0]);
       getGender()
       getRec();
     }
@@ -64,9 +64,11 @@ function askTheWeather(method, link, payload){
 
 var userInfoAPI = userInfoAPI || {};
 
-function getLowForToday(weather){
-  var temp = weather.mintempF;
-  lowTemp = parseInt(temp);
+function getCurrentTemp(weather){
+  console.log("current temp");
+  console.log(weather);
+  var temp = weather.temp_F;
+  currentTemp = parseInt(temp);
 };
 
 function getTodayInfo(object){
@@ -82,20 +84,17 @@ function getTodayInfo(object){
 };
 
 function checkForRain(hourly){
-  for (var i = 0; i<hourly.length; i ++){
-    if ( hourly[i].chanceofrain > 40) {
-      console.log(hourly[i].chanceofrain + "is greater than 40")
-      willRain = true;
-    }
+  if ( hourly[2].chanceofrain > 20 || hourly[4].chanceofrain > 20 || hourly[5].chanceofrain > 20 )  {
+    console.log("Chance of rain is greater than 20");
+    console.log(hourly);
+    willRain = true;
   }
 }
 
 function checkForSnow(hourly){
-  for (var i = 0; i<hourly.length; i ++){
-    if ( hourly[i].chanceofsnow > 10) {
-      console.log(hourly[i].chanceofsnow + "is greater than 10")
-      willSnow = true;
-    }
+  if ( hourly[2].chanceofsnow > 10 || hourly[4].chanceofsnow > 10 || hourly[5].chanceofsnow > 10 )  {
+    console.log("Chance of snow is greater than 10");
+    willSnow = true;
   }
 }
 
