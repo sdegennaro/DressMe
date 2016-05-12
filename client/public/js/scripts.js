@@ -91,6 +91,7 @@ function renderAccountInfo(userObject){
   $("#account-container").find("[name=gender]").val(userObject.gender);
   $("#account-container").find("[name=text_opt_in]").val(userObject.text_opt_in);
   getUserZipcode();
+  getGender();
   makeQueryLink(userZipcode,"json",2);
   askTheWeather("GET", queryURL);
 
@@ -98,7 +99,6 @@ function renderAccountInfo(userObject){
 
 auth.bindSwitchFormLinks = function(){
   $("#login-link, #sign-up-link").on("click", function(e){
-
       switchDisplay($("#sign-up-form"));
       switchDisplay($("#login-form"));
   });

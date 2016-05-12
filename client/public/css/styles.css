@@ -12,22 +12,31 @@ body{
 }
 
 h1 {
-  color: #ffd614;
-  font-family: 'Architects Daughter', cursive;
+  color: #fdd414;
+  font-family: 'Bitter', serif;
 }
 
 #content-container {
 
 }
 
+#weather-forecast {
+ background-color: white;
+ padding: 3%;
+ padding-left: 10%;
+ padding-right: 10%;
+}
+
+
 #landing-container {
   background-color: rgba(0,0,0,.8);
-  width: 60%;
+  width: 45%;
+  height: 60%;
   padding: 3em;
   margin: auto;
   text-align: center;
   margin-top: 10%;
-  color: white;
+  color: black;
 }
 
 #sign-up-form {
@@ -63,8 +72,9 @@ h1 {
 #logged-in-container {
   z-index: 1;
   text-align: center;
-  background-color: rgba(255, 255, 255,.9);
+  background-color: rgba(0, 0, 0,.8);
   padding-top: 3%;
+  padding-bottom: 3%;
   margin: -1%;
 }
 
@@ -79,7 +89,9 @@ h1 {
 }
 
 #rec-container {
-  border: solid red;
+  background-color: white;
+  padding: 6%;
+  height: 100%;
 }
 
 input {
@@ -89,29 +101,42 @@ input {
 
 button {
   color: white;
-  margin: 2em;
+  margin-top: 1em;
+  margin-bottom: 3em;
 
 }
 
 img {
+    width: 75%;
+}
+
+.img-rec {
     width: 100%;
-    height: auto;
 }
 
 p {
   margin: 0;
   padding: 0;
+  font-family: 'Bitter', serif;
 }
 
 h4 {
   margin: .5em;
   padding: 0;
+  font-family: 'Bitter', serif;
 }
 
 h5 {
   margin: 0;
   padding: 0;
-  font-size: 18px;
+  font-size: 20px;
+  color: white;
+}
+
+h6 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
   color: white;
 }
 
@@ -124,4 +149,13 @@ input[type=number]::-webkit-outer-spin-button {
 a {
   font-size: 18px;
   text-decoration: none;
+  color: red;
+}
+
+a:hover {
+    color: #9c0c01;
+}
+
+button:hover {
+    color: #fdd414;
 }
