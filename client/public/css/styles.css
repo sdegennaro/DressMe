@@ -107,7 +107,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 45%;
   padding: 2%;
   margin: auto;
-  text-align: center;
+  text-align: center
 }
 
 input {
