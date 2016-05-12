@@ -8,16 +8,16 @@ Javascript, Node, Express, CSS, HTML
 ### USER STORIES
 
 ### SCREENSHOTS
-http://i.imgur.com/sp8BzXp.png
-http://i.imgur.com/KaMgufa.png
-http://i.imgur.com/ji6D5qS.png
-http://i.imgur.com/glgquSK.png
-http://i.imgur.com/WeHu1ld.png
+![alt tag](http://i.imgur.com/sp8BzXp.png)
+![alt tag](http://i.imgur.com/KaMgufa.png)
+![alt tag](http://i.imgur.com/ji6D5qS.png)
+![alt tag](http://i.imgur.com/glgquSK.png)
+![alt tag](http://i.imgur.com/WeHu1ld.png)
 
 ### APPROACH
 
 ### WIRE FRAMES
-http://i.imgur.com/O32EoZ5.png
-http://i.imgur.com/cXk19jE.png
-http://i.imgur.com/kK2yb0G.png
-http://i.imgur.com/y3LbpxO.png
+![alt tag](http://i.imgur.com/O32EoZ5.png)
+![alt tag](http://i.imgur.com/cXk19jE.png)
+![alt tag](http://i.imgur.com/kK2yb0G.png)
+![alt tag](http://i.imgur.com/y3LbpxO.png)
