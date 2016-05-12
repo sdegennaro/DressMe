@@ -29,15 +29,14 @@ usersRouter.get('/', function(req, res, next) {
 var util = require("util");
 usersRouter.get('/user', function(req, res, next) {
   var username = req.query.username;
-  console.log("the body is: " + util.inspect(req.body));
-  // TODO: make one user insted
-  User.findOne({username: username}, function( err, dbUsers ){
-    res.json( dbUsers );
+  // console.log("the body is: " + util.inspect(req.body));
+  User.findOne({username: username}, function( err, dbUser ){
+    res.json( dbUser );
   });
 
 });
 
-usersRouter.get('/me', function(req, res, next) {
+usersRouter.get('/currentuser', function(req, res, next) {
   res.json( req.user );
 });
 
