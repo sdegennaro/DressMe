@@ -33,11 +33,14 @@ function textButtonHandler(){
             checkForSnow(hourlyWeather);
             var userGender = userData.gender;
             var tempNow = weatherData.data.current_condition[0].temp_F;
+            console.log('/api/recommendations?degrees=' + tempNow +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender);
             $.ajax({
               url: '/api/recommendations?degrees=' + tempNow +'&rain=' + willRain + '&snow='+ willSnow + '&gender=' + userGender,
               type: 'GET',
               success: function(recommendation){
-                sendText(recommendation.rec[0].text, userData.username);
+                console.log(recommendation.rec[0].text);
+                console.log(recommendation.rec[0]);
+                // sendText(recommendation.rec[0].text, userData.username);
 
               }
             })
