@@ -12,7 +12,6 @@ function switchClickHandler(clickElement,DOMelement,secondDOMelement,thirdDOMele
     if(thirdDOMelement){
       switchDisplay(thirdDOMelement);
     };
-
   });
 };
 
@@ -23,5 +22,5 @@ function findCurrent(){
     success: function(data){
       console.log(data.username);
     }
-  })
-}
+  });
+};

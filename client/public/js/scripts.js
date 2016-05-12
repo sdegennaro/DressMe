@@ -317,17 +317,17 @@ function accountLinkHandler(){
   accountLink.on('click',function(){
     if(accountLink.text() === "My Account") {
       accountLink.text("My Forecast")
-    }
+    };
     else {
       accountLink.text("My Account")
-    }
-  })
+    };
+  });
   updateButton.on('click', function(){
     if(accountLink.text() === 'My Forecast') {
       accountLink.text('My Account')
     }
-  })
-}
+  });
+};
 
 function setSignupStep1Button(){
   if(zipcode.length !== 5) {
