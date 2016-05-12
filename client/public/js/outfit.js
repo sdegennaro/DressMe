@@ -8,8 +8,6 @@ function getRec(){
     type: 'GET',
     success: function(recommendation){
       renderOutfit(recommendation);
-      console.log("got recommendation!");
-      askTheWeather();
     }
   })
 }
@@ -22,12 +20,13 @@ function renderOutfit(object){
   var name = object.rec[0].name;
   console.log("Today's Recommendation: " + name);
   newDiv = $("<div>")
-  newImg = $("<img src=" + image + ">")
+  newImg = $("<img src=" + image + ">");
+  newImg.addClass("img-rec");
   $("#outfit-container").append(newDiv, newImg)
   newDiv.text(object.text);
 };
 
 // this should be on submit not on page load?
 $(function(){
-  getRec();
+//  getRec();
 })

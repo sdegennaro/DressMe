@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title> DressMe </title>
     <!-- Styles -->
+    <link href='https://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
     <link rel="stylesheet" href="/css/styles.css">
     <!-- Scripts -->
@@ -22,11 +24,11 @@
 
     <div>
       <div id="landing-container" class="displayed">
-        <h1>Dress Me</h1>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+        <h1>DressMe</h1>
+        <h5>Welcome to DressMe! We're here to help you dress for the weather. We'll make sure you're prepared for any possible weather changes in your area. Sign up for a daily weather report and outfit recommendation to get the most out of your account!</h5>
         <br>
         <button type="button" id="landing-cta-button">Get Dressed</button><br>
-        <a href="#" id='landing-login-link'>Already signed up? Log in</a>
+        <a href="#" id='landing-login-link'>Already have an account? Log in here.</a>
       </div>
       <div>
         <div id="alert-msg" class="hidden">
@@ -35,14 +37,13 @@
       </div>
       <div id="logged-in-container" class="hidden">
         <header id='logged-in'>
-          <h1>You are logged In!</h1>
-          <a href="#" id="account-link">My Account</a>
+          <h1>DressMe</h1>
+          <a href="#" id="account-link">My Account</a> |
           <a href="#" id="log-out-link">Logout</a>
         </header>
 
         <div id='content-container' class="displayed">
           <div class="container">
-            <div class="row">
               <div class = "six columns">
                 <div id="weather-forecast">
                   <div id="morning-forecast">
@@ -59,26 +60,30 @@
               <div class = "five columns">
                 <div id='rec-container'>
                   <div id="current-weather-container">
-                    <h3>Today in [Insert City]</h3>
                   </div>
                   <div id="outfit-container">
+                    <img src="/images/mens/default.jpg">
                   </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
         <div id="account-container" class="hidden" style="color:white;">
           <form id="account-form">
             <div>
-              <input type="number" name="username" value="" placeholder="Username">Username
-              <input type="number" name="zipcode" value="" placeholder="Zipcode">Zipcode
-              <input type="radio" name="gender" value="Male" >Male
-              <input type="radio" name="gender" value="Female" checked >Female
-              <input type="radio" name="temp_pref" value="Hot" >I am always hot
+              <h6>USERNAME</h6>
+              <input type="number" name="username" value="" placeholder="Username">
+              <h6>ZIPCODE</h6>
+              <input type="number" name="zipcode" value="" placeholder="Zipcode">
+              <h6>GENDER</h6>
+              <input type="radio" name="gender" value="male" >Male
+              <input type="radio" name="gender" value="female" checked >Female
+              <h6>PREFERENCE</h6>
+              <input type="radio" name="temp_pref" value="Hot" >I'm always hot
               <input type="radio" name="temp_pref" value="Ok" checked >I'm usually ok
-              <input type="radio" name="temp_pref" value="Cold" >I am always cold
-              <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">Text opt in?
+              <input type="radio" name="temp_pref" value="Cold" >I'm always cold
+              <h6>TEXT OPT-IN</h6>
+              <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">
             </div>
             <button id="update-button" type="submit" name="button">Update</button>
             <button id="delete-button" type="submit" name="button">Delete</button>
@@ -91,59 +96,62 @@
         <div>
           <!-- Log In -->
           <form id="login-form" class="hidden">
-            <h1>Dress Me</h1>
+            <h1>DressMe</h1>
             <div>
+              <h6>PHONE NUMBER</h6>
               <input type="text" name="username" value="" placeholder="Phone Number">
+              <h6>PASSWORD</h6>
               <input type="password" name="password" value="" placeholder="Password">
             </div>
             <button type="submit" name="button">Log in</button>
             <div class="form-group">
-              <a href="#" id="sign-up-link">Haven't sign-up yet? Click here</a>
+              <a href="#" id="sign-up-link">Need an account? Sign up here.</a>
             </div>
           </form>
 
           <!-- Sign up -->
           <form id="sign-up-form" style="color:white;" class="hidden">
-            <h1>Dress Me</h1>
+            <h1>DressMe</h1>
             <div class="form-group hidden" id='signup-step-1'>
-              <h3>Zipcode?</h3>
+              <h6>ENTER ZIPCODE</h6>
               <input type="number" name="zipcode" value="" placeholder="5 Digit Zipcode">
               <br>
               <button type="button" name="button-1">Next</button>
               <div class="form-group">
-                <a href="#" id="login-link">Already have an account? click here</a>
+                <a href="#" id="login-link">Already have an account? Log in here.</a>
               </div>
             </div>
             <div class="form-group hidden" id='signup-step-2'>
-              <h3>Gender?</h3>
-              <input type="radio" name="gender" value="Male" >Male
-              <input type="radio" name="gender" value="Female" checked >Female
+              <h6>ENTER GENDER</h6>
+              <input type="radio" name="gender" value="male" >Male
+              <input type="radio" name="gender" value="female" checked >Female
               <br>
               <button type="button" name="button-2">Next</button>
             </div>
             <div class="form-group hidden" id='signup-step-3'>
-              <h3>How do you feel?</h3>
-              <input type="radio" name="temp_pref" value="Hot" >I am always hot
+              <h6>TELL ME ABOUT YOURSELF.</h6>
+              <input type="radio" name="temp_pref" value="Hot" >I'm always hot
               <input type="radio" name="temp_pref" value="Ok" checked >I'm usually ok
-              <input type="radio" name="temp_pref" value="Cold" >I am always cold
+              <input type="radio" name="temp_pref" value="Cold" >I'm always cold
               <br>
               <button type="button" name="button-3">Next</button>
             </div>
             <div class="form-group hidden" id='signup-step-4'>
-              <h3>Can we text you?</h3>
-              <input type="checkbox" name="text_opt_in" value="1" placeholder="Text?">Text opt in?
+              <h6>Get your weather and wardrobe recommendations to your phone every morning!</h6>
+              <input type="radio" name="text_opt_in" value="1" checked >Yes, I want this!
+              <input type="radio" name="text_opt_in" value="0" >No thank you.
               <br>
               <button type="button" name="button-4">Next</button>
             </div>
             <div class="form-group hidden" id='signup-step-5'>
-              <h3>Create your account!</h3>
-              <input type="number" name="username" value="" placeholder="Username">
+              <h6>Create your account:</h6>
+              <input type="number" name="username" value="" placeholder="Phone Number">
               <br>
               <input type="password" name="password" value="" placeholder="Password">
               <br>
               <input type="password" name="password_confirm" value="" placeholder="Password Confirm">
               <br>
-              <button type="submit" class="btn btn-default" name="button2">Complete Sign Up</button>
+              <button type="submit" class="btn btn-default" name="button2">Complete Your Account</button>
             </div>
 
 
