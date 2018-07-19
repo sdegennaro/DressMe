@@ -18,10 +18,6 @@ body{
   margin-bottom:
 }
 
-#content-container {
-
-}
-
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -55,8 +51,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: auto;
   text-align: center;
   margin-top: 10%;
-  color: black;
-
+  color: white;
 }
 
 #login-form {
@@ -198,7 +193,11 @@ button:hover {
   #landing-container {width: 90%;)
 }*/
 
-@media(max-width: 375px){
+@media(max-width: 768px){
+
+  #rec-container {
+    margin-top: 1em;
+  }
 
   #account-container{
     width: 80%;

@@ -43,5 +43,5 @@ app.use('/api/recommendations', apiRecRouter);
 
 var port = process.env.PORT || 3000;
 app.listen( port, function() {
-  console.log("sunny skies on 3000");
+  console.log("Listening on 3000");
 });

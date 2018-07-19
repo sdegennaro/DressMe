@@ -84,8 +84,6 @@ function askTheWeather(method, link, payload){
 var userInfoAPI = userInfoAPI || {};
 
 function getCurrentTemp(weather){
-  console.log("current temp");
-  console.log(weather);
   var temp = weather.temp_F;
   currentTemp = parseInt(temp);
 };
@@ -104,15 +102,12 @@ function getTodayInfo(object){
 
 function checkForRain(hourly){
   if ( hourly[2].chanceofrain > 20 || hourly[4].chanceofrain > 20 || hourly[5].chanceofrain > 20 )  {
-    console.log("Chance of rain is greater than 20");
-    console.log(hourly);
     willRain = true;
   }
 }
 
 function checkForSnow(hourly){
   if ( hourly[2].chanceofsnow > 10 || hourly[4].chanceofsnow > 10 || hourly[5].chanceofsnow > 10 )  {
-    console.log("Chance of snow is greater than 10");
     willSnow = true;
   }
 }
@@ -151,5 +146,4 @@ function renderCurrentInfo(object){
 
 $(function(){
   getKey();
-
 })
